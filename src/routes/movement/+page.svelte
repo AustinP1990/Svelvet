@@ -4,7 +4,7 @@
 	import { onMount, onDestroy } from 'svelte';
 
 	let position = { x: 300, y: 300 };
-	$: console.log(position);
+	// $: console.log(position);
 	let isDragging = false;
 	let offsetX = 0;
 	let offsetY = 0;

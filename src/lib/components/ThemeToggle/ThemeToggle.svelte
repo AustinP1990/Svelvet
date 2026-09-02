@@ -1,5 +1,5 @@
 <script lang="ts">
-	console.log('Componente ThemeToggle.svelte');
+	// console.log('Componente ThemeToggle.svelte');
 	import type { CSSColorString } from '$lib/types';
 	import { getJSONState } from '$lib/utils/savers/saveStore'; // Esta es la función que guarda el estado de los nodos en el localStorage
 	import { onMount } from 'svelte';
@@ -57,13 +57,13 @@
 		// Aquí es donde restauras los nodos cuando la aplicación se monta
 		const savedGraphState = localStorage.getItem('state');
 		if (savedGraphState) {
-			console.log("Al renderizar la aplicacion este componente se ejecuta en este orden")
+			// console.log("Al renderizar la aplicacion este componente se ejecuta en este orden")
 			const parsedGraphState = JSON.parse(savedGraphState);
 			if (parsedGraphState && parsedGraphState.nodes) {
 				const graph = get(graphStore);
-				console.log(graph)
+				// console.log(graph)
 				graph.set('G-1', parsedGraphState);
-				console.log('Restaurando nodos:', parsedGraphState.nodes);
+				// console.log('Restaurando nodos:', parsedGraphState.nodes);
 			}
 		}
 	});
@@ -73,7 +73,7 @@
 	graphStore.subscribe((graphMap) => {
 		const graphKey = 'G-1';
 		graph = graphMap.get(graphKey);
-		console.log('Graph from store:', graph);
+		// console.log('Graph from store:', graph);
 	});
 	function logCurrentGraphState() {
 		const currentGraphMap = get(graphStore);
@@ -90,7 +90,7 @@
 	function handleSaveButton() {
 		const graphState = get(graphStore).get('G-1'); // Obtiene el estado actual de los nodos
 		const jsonState = getJSONState(graphState); // Esto guarda el estado de los nodos
-		console.log('Estado de los nodos guardado:', jsonState);
+		// console.log('Estado de los nodos guardado:', jsonState);
 	}
 </script>
 

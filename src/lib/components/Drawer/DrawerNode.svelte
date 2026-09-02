@@ -89,16 +89,16 @@
 
 		// Add props to node if they exist
 		addProps(nodePropNames, nodePropsArray, nodeProps);
-		console.log('Nodo antes de props insertado', nodeProps);
+		// console.log('Nodo antes de props insertado', nodeProps);
 		if (anchorProps) nodeProps.anchors = anchorProps;
 		if (edgeProps) nodeProps.edgeProps = edgeProps;
-		console.log('Nodo despues de props insertado', nodeProps);
+		// console.log('Nodo despues de props insertado', nodeProps);
 		// defaultNodePropsStore.update((nodes) => [...nodes, nodeProps]);
 		defaultNodePropsStore.update((nodes) => {
 			const updatedNodes = [...nodes, nodeProps];
 			/**Este log prueba que el store se esta aactualizando correctamente
 			 * cada vez que se crea un nodo, se agrega al store array de nodos*/
-			console.log('updated store:', updatedNodes); // Verifica el contenido del store
+			// console.log('updated store:', updatedNodes); // Verifica el contenido del store
 			return updatedNodes;
 		});
 

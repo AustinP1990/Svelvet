@@ -137,14 +137,14 @@
 	// occurs after Svelvet renders
 	// updated by team v.11.0
 	onMount(() => {
-		console.log('Graph component mounted with drawer:', drawer);
+		// console.log('Graph component mounted with drawer:', drawer);
 		const stateObject = localStorage.getItem('state');
-		console.log('stateObject during onMount:', stateObject); // Aqui esta confirmado que localStorage.getItem('state') esta trayendo el grafico "PERFECTAMENTE BIEN" desde el localStorage
+		// console.log('stateObject during onMount:', stateObject); // Aqui esta confirmado que localStorage.getItem('state') esta trayendo el grafico "PERFECTAMENTE BIEN" desde el localStorage
 		if (stateObject) {
 			graph = reloadStore(stateObject);
-			console.log('Este es el graph seteado mediante reloadStore(stateObject)', graph);
+			// console.log('Este es el graph seteado mediante reloadStore(stateObject)', graph);
 			graphStore.add(graph, graph.id); //ERRROR: graphStore no se esta actuaklzando
-			console.log('graphStore actualizado', graph);
+			// console.log('graphStore actualizado', graph);
 		} else {
 			let graphKey: GraphKey = `G-${id || graphStore.count() + 1}`;
 			graph = createGraph(graphKey, { zoom, direction, editable, locked, translation });

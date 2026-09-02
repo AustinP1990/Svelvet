@@ -25,9 +25,9 @@
         const currentGraphMap = get(graphStore);
         const graph = currentGraphMap.get('G-1');
         if (graph) {
-            console.log('Current Graph State:', graph);
+            // console.log('Current Graph State:', graph);
         } else {
-            console.log('No current graph found');
+            // console.log('No current graph found');
         }
     }
 </script>
