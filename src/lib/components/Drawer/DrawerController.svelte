@@ -134,7 +134,7 @@
 	const handleNodeDragStart = (e: DragEvent, node: HTMLElement, nodeType: string) => {
 		// const handleNodeDragStart = (e: DragEvent, node: HTMLElement) => {
 		if (!e.dataTransfer) return;
-		console.log('Dragging Node:', nodeType);
+		// console.log('Dragging Node:', nodeType);
 
 		e.dataTransfer.dropEffect = 'move';
 		e.dataTransfer.setData('text/plain', nodeType);
@@ -156,9 +156,9 @@
 
 	const handleDragMove = (e: MouseEvent) => {
 		if (!currentNode) return;
-		console.log('handleDragMove function called!');
+		// console.log('handleDragMove function called!');
 
-		console.log('Dragging...', e.clientX, e.clientY);
+		// console.log('Dragging...', e.clientX, e.clientY);
 
 		// Calculate the new position based on mouse movement
 		const newX = e.clientX - offsetX;
@@ -166,7 +166,7 @@
 
 		// Snap the new position to the grid
 		const { x: snappedX, y: snappedY } = getSnappedPosition(newX, newY);
-		console.log('Snapped to:', snappedX, snappedY);
+		// console.log('Snapped to:', snappedX, snappedY);
 
 		//only update if the position actually changed
 		if (

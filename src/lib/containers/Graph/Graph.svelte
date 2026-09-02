@@ -46,7 +46,7 @@
 	export let contrast = false;
 
 	// Log drawer prop initially
-	console.log('Initial Graph drawer prop:', drawer);
+	// console.log('Initial Graph drawer prop:', drawer);
 
 	let animationFrameId: number;
 
@@ -116,7 +116,7 @@
 	$: if (contrast && !contrastComponent) loadContrast();
 
 	// Log drawer prop when it changes
-	$: console.log('Reactive Graph drawer prop:', drawer);
+	// $: console.log('Reactive Graph drawer prop:', drawer);
 
 	// This is a temporary workaround for generating an edge where one of the anchors is the cursor
 	const cursorAnchor: CursorAnchor = {
@@ -159,7 +159,7 @@
 
 	// Lifecycle methods
 	onMount(() => {
-		console.log('Graph component mounted with drawer1:', drawer); // Add this line
+		// console.log('Graph component mounted with drawer1:', drawer); // Add this line
 		updateGraphDimensions();
 	});
 
@@ -428,7 +428,7 @@
 
 		// Snap the position to the nearest grid point
 		const { x: snappedX, y: snappedY } = getSnappedPosition(mouseX, mouseY);
-		console.log(`Dropped Node at Snapped Position: (${snappedX}, ${snappedY})`);
+		// console.log(`Dropped Node at Snapped Position: (${snappedX}, ${snappedY})`);
 
 		// Ensure that a node type is being dragged
 		if (!draggedNodeType) return;

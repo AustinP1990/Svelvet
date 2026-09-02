@@ -240,7 +240,7 @@
 	const handleAnchorPositionButton = (e: any) => {
 		if (e.target.value == '') nodeDirection = undefined;
 		else {
-			console.log(e.target.value);
+			// console.log(e.target.value);
 			nodeDirection = e.target.value;
 			if (nodeDirection === 'LR') {
 				LR = true;
