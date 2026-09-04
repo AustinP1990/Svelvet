@@ -8,6 +8,7 @@
 	import { createEdgeProps } from './DrawerEdge.svelte';
 	import Icon from '$lib/assets/icons/Icon.svelte';
 	import { onMount, onDestroy } from 'svelte';
+	import { getSnappedPosition } from '$lib/utils/snapGrid';
 
 	let isOpen = false;
 	let nodeContainerOpen = false;
@@ -130,6 +131,7 @@
 	let offsetY = 0;
 
 	let draggedNodeType: string | null = null;
+	let currentNode: HTMLElement | null = null;
 	// Dragging logic for node
 	const handleNodeDragStart = (e: DragEvent, node: HTMLElement, nodeType: string) => {
 		// const handleNodeDragStart = (e: DragEvent, node: HTMLElement) => {
@@ -144,8 +146,10 @@
 		currentNode = node;
 
 		// Store the initial offset relative to the mouse position
-		// offsetX = e.clientX - node.offsetLeft;
-		// offsetY = e.clientY - node.offsetTop;
+		//  Replaced the offsetLeft and offsetTop with style.left and style.top
+		//  to be consistent with code farther below
+		offsetX = e.clientX - parseInt(currentNode.style.left, 10);
+		offsetY = e.clientY - parseInt(currentNode.style.top, 10);
 
 		// node.style.position = 'absolute'; // To move freely within the container
 
@@ -274,7 +278,7 @@
 					on:dragstart={(e) => {
 						const target = e.target;
 						if (target instanceof HTMLElement) {
-							handleNodeDragStart(e, target);
+							handleNodeDragStart(e, target, 'Default Node'); // Nodes seem to be the only thing dragged
 						}
 					}}
 				>

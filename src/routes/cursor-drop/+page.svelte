@@ -125,6 +125,8 @@
 </script>
 
 <div
+	role="region"
+	aria-label="Node drop zone"
 	class={dropZoneClass}
 	on:dragover={onDragOver}
 	on:dragenter={onDragEnter}
@@ -174,7 +176,16 @@
 				Centered: <input type="checkbox" bind:value={center} on:change={handleCenterButtonClick} />
 			</li>
 			<li class="list-item">
-				<div id="createNode" draggable="true" on:dragstart={onDragStart}>Node</div>
+				<div
+					id="createNode"
+					role="button"
+					aria-label="Drag to create a node"
+					tabindex="0"
+					draggable="true"
+					on:dragstart={onDragStart}
+				>
+					Node
+				</div>
 			</li>
 			<li>
 				<button on:click|stopPropagation={handleClick}>Reset</button>

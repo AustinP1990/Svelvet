@@ -2,18 +2,27 @@
 	import { Svelvet, Node } from '$lib';
 	import type { Connections, NodeConfig } from '$lib/types';
 
-	const initialNodes = [
+	type InitialEdge = {
+		id: string;
+		source: string | number;
+		target: string | number;
+		label?: string;
+		animate?: boolean;
+		arrow?: boolean;
+	};
+
+	const initialNodes: NodeConfig[] = [
 		{
 			id: 1,
 			position: { x: 50, y: 50 },
-			data: { label: 'default styling' },
+			label: 'default styling',
 			width: 150,
 			height: 40
 		},
 		{
 			id: 2,
 			position: { x: 50, y: 110 },
-			data: { label: 'borderColor' },
+			label: 'borderColor',
 			width: 150,
 			height: 40,
 			borderColor: 'red',
@@ -22,7 +31,7 @@
 		{
 			id: 3,
 			position: { x: 220, y: 50 },
-			data: { label: 'textColor' },
+			label: 'textColor',
 			width: 150,
 			height: 40,
 			textColor: '#3F6FD6',
@@ -31,7 +40,7 @@
 		{
 			id: 4,
 			position: { x: 220, y: 110 },
-			data: { label: 'bgColor' },
+			label: 'bgColor',
 			width: 150,
 			height: 40,
 			textColor: 'white',
@@ -41,7 +50,7 @@
 		{
 			id: 5,
 			position: { x: 85, y: 170 },
-			data: { label: 'width and height' },
+			label: 'width and height',
 			width: 90,
 			height: 110,
 			bgColor: 'white'
@@ -49,7 +58,7 @@
 		{
 			id: 6,
 			position: { x: 250, y: 175 },
-			data: { label: 'borderRadius' },
+			label: 'borderRadius',
 			width: 100,
 			height: 100,
 			bgColor: 'yellow',
@@ -58,14 +67,14 @@
 		{
 			id: 7,
 			position: { x: 50, y: 300 },
-			data: { label: 'clickCallback' },
+			label: 'clickCallback',
 			width: 150,
 			height: 40,
 			bgColor: 'white'
 		}
 	];
 
-	const initialEdges = [
+	const initialEdges: InitialEdge[] = [
 		{ id: 'e1-2', source: 1, target: 2, label: 'connection' },
 		{ id: 'e2-3', source: 2, target: 3, label: 'label' },
 		{
@@ -111,11 +120,7 @@
 	<div class="wrapper">
 		<Svelvet translation={{ x: 0, y: 0 }} width={800} height={500} theme="dark" controls>
 			{#each initialNodes as node}
-				<Node
-					{...node}
-					label={node.data.label || ''}
-					connections={node.id ? connections[node?.id] : []}
-				/>
+				<Node {...node} connections={node.id ? connections[node?.id] : []} />
 			{/each}
 		</Svelvet>
 	</div>

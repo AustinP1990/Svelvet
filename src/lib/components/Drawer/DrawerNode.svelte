@@ -14,13 +14,14 @@
 	// External stores
 	export const defaultNodePropsStore = writable<Array<NodeDrawerConfig>>([]);
 
-	// Node properties
-	let nodeProps: Partial<NodeDrawerConfig> = {
-		width: 200,
-		height: 100,
-		x: 0,
-		y: 0
-	};
+	// Seemed to be just for testing in the past
+	// // Node properties
+	// let nodeProps: Partial<NodeDrawerConfig> = {
+	// 	width: 200,
+	// 	height: 100,
+	// 	x: 0,
+	// 	y: 0
+	// };
 
 	// types for node creation
 	let bgColor: CSSColorString | undefined;

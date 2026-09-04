@@ -70,6 +70,7 @@ export interface NodeConfig {
 	borderColor?: CSSColorString;
 	bgColor?: CSSColorString;
 	useDefaults?: boolean;
+	center?: boolean;
 	borderRadius?: number;
 	borderWidth?: number;
 	rotation?: number;

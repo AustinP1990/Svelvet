@@ -11,15 +11,7 @@ import { calculateViewportCenter } from '../calculators/calculateViewPortCenter'
 
 // updated by team v.11.0
 export function createGraph(id: GraphKey, config: GraphConfig): Graph {
-	const {
-		zoom,
-		editable,
-		translation: initialTranslation,
-		direction,
-		locked,
-		edge,
-		nodes: initialNodes
-	} = config;
+	const { zoom, editable, translation: initialTranslation, direction, locked, edge } = config;
 
 	const translation = writable({
 		x: initialTranslation?.x || 0,

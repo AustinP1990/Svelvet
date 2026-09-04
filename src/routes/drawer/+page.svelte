@@ -362,6 +362,7 @@
 					draggable="true"
 					on:dragstart={handleDragStart}
 					on:dragend={handleDragEnd}
+					role="note"
 				>
 					Node
 				</div>

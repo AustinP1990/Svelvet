@@ -46,7 +46,7 @@
 	export let minimap = false;
 	export let controls = false;
 	export let toggle = false;
-	export let drawer: boolean = false;
+	export let drawer = false;
 	export let contrast = false;
 
 	// $: console.log("Svelvet drawer prop:", drawer);
@@ -174,19 +174,22 @@
 		source: [string | number, string | number],
 		target: [string | number, string | number]
 	) {
-		const sourceNodeKey: NodeKey = `N-${source[0]}`;
-		const sourceNode = graph.nodes.get(sourceNodeKey);
-		if (!sourceNode) return;
-		const sourceAnchor = sourceNode.anchors.get(`A-${source[1]}/N-${source[0]}`);
-		if (!sourceAnchor) return;
-		const targetNodeKey: NodeKey = `N-${target[0]}`;
-		const targetNode = graph.nodes.get(targetNodeKey);
-		if (!targetNode) return;
-		const targetAnchor = targetNode.anchors.get(`A-${target[1]}/N-${target[0]}`);
-		if (!targetAnchor) return;
-		const edgeKey = graph.edges.match(sourceAnchor, targetAnchor);
-		if (!edgeKey) return;
-		graph.edges.delete(edgeKey[0]);
+		if (graph !== null && graph !== undefined) {
+			// Just in case graph is not initialized
+			const sourceNodeKey: NodeKey = `N-${source[0]}`;
+			const sourceNode = graph.nodes.get(sourceNodeKey);
+			if (!sourceNode) return;
+			const sourceAnchor = sourceNode.anchors.get(`A-${source[1]}/N-${source[0]}`);
+			if (!sourceAnchor) return;
+			const targetNodeKey: NodeKey = `N-${target[0]}`;
+			const targetNode = graph.nodes.get(targetNodeKey);
+			if (!targetNode) return;
+			const targetAnchor = targetNode.anchors.get(`A-${target[1]}/N-${target[0]}`);
+			if (!targetAnchor) return;
+			const edgeKey = graph.edges.match(sourceAnchor, targetAnchor);
+			if (!edgeKey) return;
+			graph.edges.delete(edgeKey[0]);
+		}
 	}
 </script>
 

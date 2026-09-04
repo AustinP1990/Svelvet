@@ -22,8 +22,8 @@
 	let current = contrastThemes[0];
 	let isCustomTheme = false;
 
-	function changeTheme(event: { target: { value: any } }) {
-		const selectedTheme = event.target.value;
+	function changeTheme(event: Event & { currentTarget: HTMLSelectElement }) {
+		const selectedTheme = event.currentTarget.value;
 
 		if (selectedTheme === 'Custom') {
 			isCustomTheme = true;
@@ -81,7 +81,7 @@
 				isCustomTheme = false;
 				current = contrastThemes[0];
 				document.documentElement.setAttribute('svelvet-theme', current);
-				let themeSelector = document.getElementById('themeSelector');
+				const themeSelector = document.querySelector < HTMLSelectElement > '#themeSelector';
 				if (themeSelector) {
 					themeSelector.value = current;
 				}

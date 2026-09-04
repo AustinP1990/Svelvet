@@ -1,9 +1,8 @@
 <script lang="ts">
-	import Slider from '../data/Slider/Slider.svelte';
+	// import Slider from '../data/Slider/Slider.svelte';
 	import TextField from '../data/TextField/TextField.svelte';
 	import type { Graph } from '$lib/types';
-	import { writable, type Writable } from 'svelte/store';
-	import { Resizer } from '$lib';
+	import type { Writable } from 'svelte/store';
 	import { getContext, setContext } from 'svelte';
 
 	import type { CSSColorString, Node as SvelvetNode } from '$lib/types';

@@ -11,16 +11,16 @@
 	import Drawer from '$lib/components/Drawer/Drawer.svelte';
 
 	// Define a variable for the node's color
-	let nodeColor = '#E94646';
+	let nodeColor: CSSColorString = '#E94646';
 
 	// Input data with the initial color
-	const initialData = {
+	const initialData: { color: CSSColorString } = {
 		color: nodeColor
 	};
 
 	const inputs = generateInput(initialData);
 
-	const processor = (inputs) => inputs.color;
+	const processor = (inputs: { color: CSSColorString }) => inputs.color;
 	const output = generateOutput(inputs, processor);
 </script>
 

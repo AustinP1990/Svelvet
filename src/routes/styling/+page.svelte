@@ -14,7 +14,7 @@
 		/>
 		<Node --node-color="red" --node-border-radius="40px" id="node2" label="test" />
 		<Node label="what" position={{ x: 10, y: 200 }} inputs={3} TD />
-		<Node label="what" position={{ x: 100, y: 200 }} inputs={2} TD blocked />
+		<Node label="what" position={{ x: 100, y: 200 }} inputs={2} TD />
 		<ThemeToggle slot="toggle" main="light" alt="custom-theme" />
 	</Svelvet>
 </body>

@@ -1,5 +1,5 @@
 import type { Writable } from 'svelte/store';
-import type { Node, Graph, XYPair, GroupBox } from '$lib/types';
+import type { Node, Graph, XYPair, GroupBox, GroupKey } from '$lib/types';
 import { writable, get } from 'svelte/store';
 import { initialClickPosition, tracking } from '$lib/stores';
 import { getSnappedPosition } from '../snapGrid';
@@ -15,7 +15,7 @@ export function captureGroup(group: Writable<Set<Node | GroupBox>>): XYPair[] {
 }
 
 // Create and add a group box to graph.groupBoxes (for testing)
-function createGroupBox(graph: Graph, groupName: string) {
+function createGroupBox(graph: Graph, groupName: GroupKey) {
 	// If the group box already exists, do not create a duplicate
 	// if (graph.groupBoxes.hasOwnProperty(groupName)) {
 	// 	console.warn(`⚠️ Group box for "${groupName}" already exists! Skipping creation.`);
@@ -24,12 +24,15 @@ function createGroupBox(graph: Graph, groupName: string) {
 	const groupBox: GroupBox = {
 		group: writable(groupName),
 		position: writable({ x: 0, y: 0 }),
-		dimensions: writable({ width: 300, height: 300 }),
+		dimensions: {
+			width: writable(300),
+			height: writable(300)
+		},
 		color: writable('#ff0000'),
 		moving: writable(false)
 	};
 	// Add to graph.groupBoxes before moving nodes
-	graph.groupBoxes.set(groupName, groupBox);
+	graph.groupBoxes.add(groupBox, groupName);
 
 	// console.log(`Group box for ${groupName} created!`);
 	// console.log('Current group boxes:', get(graph.groupBoxes));

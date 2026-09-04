@@ -23,6 +23,7 @@
 		AnchorConnectionEvent
 	} from '$lib/types';
 	import type { InputType, NodeKey, OutputStore, InputStore, ConnectingFrom } from '$lib/types';
+	import type { FlowChart } from '$lib/types/parser';
 	import type { ComponentType } from 'svelte';
 	import type { Writable, Readable } from 'svelte/store';
 
@@ -57,7 +58,7 @@
 	const graphEdge = getContext<ComponentType>('graphEdge');
 	const nodeConnectEvent = getContext<Writable<null | MouseEvent>>('nodeConnectEvent');
 	const anchorsMounted = getContext<Writable<number>>('anchorsMounted');
-	const flowChart = getContext<object>('flowchart') || undefined;
+	const flowChart = getContext<FlowChart | undefined>('flowchart');
 
 	export let bgColor: CSSColorString | null = null;
 	export let id: string | number = 0;
@@ -429,7 +430,7 @@
 				if (targetInSourceChildren) {
 					// configure the edge with data defined in the flowchart
 					const edgeData = targetInSourceChildren;
-					edgeConfig.label = { text: edgeData.content };
+					edgeConfig.label = { text: edgeData.content ?? '' };
 				}
 			}
 		}

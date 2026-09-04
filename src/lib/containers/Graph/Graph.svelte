@@ -14,9 +14,19 @@
 	import { moveElement, zoomAndTranslate } from '$lib/utils/movers';
 	import type { Writable } from 'svelte/store';
 	import type { ComponentType } from 'svelte';
-	import type { Graph, GroupBox, GraphDimensions, CSSColorString } from '$lib/types';
+	import type {
+		Graph,
+		GroupBox,
+		GraphDimensions,
+		CSSColorString,
+		Node,
+		Anchor,
+		AnchorKey,
+		Direction
+	} from '$lib/types';
 	import type { Arrow, GroupKey, Group, CursorAnchor, ActiveIntervals } from '$lib/types';
 	import { getSnappedPosition } from '$lib/utils/snapGrid';
+	import { createStore } from '$lib/utils/creators/createStore';
 </script>
 
 <script lang="ts">
@@ -407,8 +417,8 @@
 		} else if (key === 'c') {
 			controls = !controls;
 		} else if (key === 'e') {
-			const node = Array.from($selected)[0];
-			graph.editing.set(node);
+			const node = Array.from($selected).find(isNode);
+			if (node) graph.editing.set(node);
 		} else {
 			return; // Unhandled action: used default handler
 		}
@@ -416,8 +426,17 @@
 		e.preventDefault();
 	}
 
+	// Helper function to check if an item is a node
+	function isNode(item: Node | GroupBox): item is Node {
+		return 'anchors' in item;
+	}
+
 	function handleDrop(e: DragEvent) {
 		e.preventDefault();
+
+		// Retrieve the type of the node from the event
+		const draggedNodeType = e.dataTransfer?.getData('text/plain');
+		if (!draggedNodeType) return;
 
 		// Get the mouse position relative to the graph's DOM element
 		const graphRect = $graphDOMElement?.getBoundingClientRect();
@@ -430,12 +449,9 @@
 		const { x: snappedX, y: snappedY } = getSnappedPosition(mouseX, mouseY);
 		// console.log(`Dropped Node at Snapped Position: (${snappedX}, ${snappedY})`);
 
-		// Ensure that a node type is being dragged
-		if (!draggedNodeType) return;
-
 		// Create a new node with the snapped position
-		const newNode = {
-			id: `node-${Date.now()}`, // Unique ID based on timestamp
+		const newNode: Node = {
+			id: `N-${Date.now()}`, // Unique ID based on timestamp
 			rotation: writable(0), // Rotation angle
 			position: writable({ x: snappedX, y: snappedY }), // Position as a writable store
 			moving: writable(false), // Initial moving state
@@ -446,7 +462,7 @@
 			},
 			inputs: writable(2), // Default number of input anchors
 			outputs: writable(2), // Default number of output anchors
-			anchors: writable([]), // Empty anchors array (you may want to define this more specifically)
+			anchors: createStore<Anchor, AnchorKey>(),
 			group: writable(null), // Initially no group
 			collapsed: writable(false), // Default collapsed state
 			resizingWidth: writable(false), // Default resizing width state
@@ -454,7 +470,7 @@
 			rotating: writable(false), // Default rotating state
 			editable: writable(true), // Node is editable by default
 			locked: writable(false), // Node is not locked by default
-			recalculateAnchors: (direction?: Direction) => {
+			recalculateAnchors: (direction?: Direction | undefined) => {
 				/* Implementation */
 			}, // Function for recalculating anchors
 			resizable: writable(true), // Node is resizable by default
@@ -469,15 +485,8 @@
 			selectionColor: writable('#ff0000'), // Default selection color
 			textColor: writable('#fff') // Default text color
 		};
-		let draggedNodeType: string | null = null;
-
-		type Direction = 'TD' | 'LR';
-
 		// Add the new node to the graph store
 		graph.nodes.add(newNode, newNode.id);
-
-		// Reset the dragged node type
-		draggedNodeType = null;
 	}
 
 	//This function handles selecting nodes
