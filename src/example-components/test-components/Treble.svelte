@@ -16,17 +16,17 @@
 	const output = generateOutput(inputs, procesor);
 </script>
 
-<Node useDefaults rotation={0} position={{ x: 110, y: 300 }} let:selected>
-	<NodeWrapper title="Treble" outputStore={output} key="treble">
+<Node useDefaults rotation="{0}" position="{{ x: 110, y: 300 }}" let:selected>
+	<NodeWrapper title="Treble" outputStore="{output}" key="treble">
 		<div class="node-body">
 			<Knob
-				fixed={0}
-				min={-20}
-				max={20}
-				step={5}
-				minDegree={30}
-				maxDegree={330}
-				parameterStore={$inputs.data}
+				fixed="{0}"
+				min="{-20}"
+				max="{20}"
+				step="{5}"
+				minDegree="{30}"
+				maxDegree="{330}"
+				parameterStore="{$inputs.data}"
 			/>
 		</div>
 	</NodeWrapper>

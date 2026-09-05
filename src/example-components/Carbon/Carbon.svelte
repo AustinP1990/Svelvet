@@ -3,7 +3,7 @@
 	import Table from './Table.svelte';
 </script>
 
-<Node useDefaults id="node-a" position={{ x: 10, y: 100 }} let:selected>
+<Node useDefaults id="node-a" position="{{ x: 10, y: 100 }}" let:selected>
 	<div class="node">
 		<div class="header">
 			<h1>Table 1</h1>

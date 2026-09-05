@@ -196,28 +196,28 @@
 <!-- Aqui se renderiza el grafico -->
 {#if graph}
 	<Graph
-		{width}
-		{height}
-		{toggle}
-		{backgroundExists}
-		{minimap}
-		{graph}
-		{fitView}
-		{fixedZoom}
-		{pannable}
-		{theme}
-		{drawer}
-		{controls}
-		{selectionColor}
-		{disableSelection}
-		{trackpadPan}
-		{modifier}
-		{title}
-		{contrast}
+		width="{width}"
+		height="{height}"
+		toggle="{toggle}"
+		backgroundExists="{backgroundExists}"
+		minimap="{minimap}"
+		graph="{graph}"
+		fitView="{fitView}"
+		fixedZoom="{fixedZoom}"
+		pannable="{pannable}"
+		theme="{theme}"
+		drawer="{drawer}"
+		controls="{controls}"
+		selectionColor="{selectionColor}"
+		disableSelection="{disableSelection}"
+		trackpadPan="{trackpadPan}"
+		modifier="{modifier}"
+		title="{title}"
+		contrast="{contrast}"
 		on:edgeDrop
 	>
 		{#if mermaid.length}
-			<FlowChart {mermaid} {mermaidConfig} />
+			<FlowChart mermaid="{mermaid}" mermaidConfig="{mermaidConfig}" />
 		{/if}
 		<slot />
 		<slot name="minimap" slot="minimap" />
@@ -230,9 +230,9 @@
 {:else}
 	<div
 		class="svelvet-temp"
-		style:width={width ? width + 'px' : '100%'}
-		style:height={height ? height + 'px' : '100%'}
-	/>
+		style:width="{width ? width + 'px' : '100%'}"
+		style:height="{height ? height + 'px' : '100%'}"
+	></div>
 {/if}
 
 <style>

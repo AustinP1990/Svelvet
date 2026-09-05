@@ -301,10 +301,10 @@ const svelvetProps: SvelvetConfig = {
 <div
 	role="presentation"
 	class="drop_zone"
-	on:dragenter={handleDragEnter}
-	on:dragleave={handleDragLeave}
-	on:dragover={onDragOver}
-	on:drop={handleDrop}
+	on:dragenter="{handleDragEnter}"
+	on:dragleave="{handleDragLeave}"
+	on:dragover="{onDragOver}"
+	on:drop="{handleDrop}"
 >
 	<Svelvet {...svelvetProps} drawer>
 		{#each defaultNodes as { anchors, edgeProps, ...nodeProps }}

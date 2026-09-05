@@ -235,19 +235,19 @@
 </script>
 
 {#if width}
-	<div use:resizeHandler={{ left }} class:width class="left" />
-	<div use:resizeHandler={{ right }} class:width class="right" />
+	<div use:resizeHandler="{{ left }}" class:width="{width}" class="left"></div>
+	<div use:resizeHandler="{{ right }}" class:width="{width}" class="right"></div>
 {/if}
 
 {#if height}
-	<div use:resizeHandler={{ top }} class:height class="top" />
-	<div use:resizeHandler={{ bottom }} class:height class="bottom" />
+	<div use:resizeHandler="{{ top }}" class:height="{height}" class="top"></div>
+	<div use:resizeHandler="{{ bottom }}" class:height="{height}" class="bottom"></div>
 {/if}
 {#if both}
-	<div use:resizeHandler={{ both }} class:both />
+	<div use:resizeHandler="{{ both }}" class:both="{both}"></div>
 {/if}
 {#if rotation}
-	<div use:rotateHandler class:rotation />
+	<div use:rotateHandler class:rotation="{rotation}"></div>
 {/if}
 
 <style>

@@ -640,26 +640,26 @@
 
 <section
 	role="presentation"
-	id={graph.id}
+	id="{graph.id}"
 	class="svelvet-wrapper"
-	{title}
-	style:width={width ? width + 'px' : '100%'}
-	style:height={height ? height + 'px' : '100%'}
-	style:cursor={pannable ? 'move' : 'default'}
-	on:wheel|preventDefault={handleScroll}
-	on:mousedown|preventDefault|self={onMouseDown}
-	on:touchend|preventDefault={onTouchEnd}
-	on:touchstart|preventDefault|self={onTouchStart}
-	on:keydown={handleKeyDown}
-	on:keyup={handleKeyUp}
-	on:dragover|preventDefault={handleDragOver}
-	on:drop={handleDrop}
-	bind:this={$graphDOMElement}
-	tabindex={0}
+	title="{title}"
+	style:width="{width ? width + 'px' : '100%'}"
+	style:height="{height ? height + 'px' : '100%'}"
+	style:cursor="{pannable ? 'move' : 'default'}"
+	on:wheel|preventDefault="{handleScroll}"
+	on:mousedown|preventDefault|self="{onMouseDown}"
+	on:touchend|preventDefault="{onTouchEnd}"
+	on:touchstart|preventDefault|self="{onTouchStart}"
+	on:keydown="{handleKeyDown}"
+	on:keyup="{handleKeyUp}"
+	on:dragover|preventDefault="{handleDragOver}"
+	on:drop="{handleDrop}"
+	bind:this="{$graphDOMElement}"
+	tabindex="{0}"
 >
-	<GraphRenderer {isMovable}>
+	<GraphRenderer isMovable="{isMovable}">
 		{#if $editing}
-			<Editor editing={$editing} />
+			<Editor editing="{$editing}" />
 		{/if}
 		<slot />
 	</GraphRenderer>
@@ -670,19 +670,19 @@
 		<Background />
 	{/if}
 	{#if minimap}
-		<svelte:component this={minimapComponent} />
+		<svelte:component this="{minimapComponent}" />
 	{/if}
 	{#if controls}
-		<svelte:component this={controlsComponent} />
+		<svelte:component this="{controlsComponent}" />
 	{/if}
 	{#if toggle}
-		<svelte:component this={toggleComponent} />
+		<svelte:component this="{toggleComponent}" />
 	{/if}
 	{#if drawer}
-		<svelte:component this={drawerComponent} />
+		<svelte:component this="{drawerComponent}" />
 	{/if}
 	{#if contrast}
-		<svelte:component this={contrastComponent} />
+		<svelte:component this="{contrastComponent}" />
 	{/if}
 	<slot name="minimap" />
 	<slot name="drawer" />
@@ -690,15 +690,21 @@
 	<slot name="toggle" />
 	<slot name="contrast" />
 	{#if selecting && !disableSelection}
-		<SelectionBox {creating} {anchor} {graph} {adding} color={selectionColor} />
+		<SelectionBox
+			creating="{creating}"
+			anchor="{anchor}"
+			graph="{graph}"
+			adding="{adding}"
+			color="{selectionColor}"
+		/>
 	{/if}
 </section>
 
 <svelte:window
-	on:touchend={onMouseUp}
-	on:mouseup={onMouseUp}
-	on:resize={updateGraphDimensions}
-	on:scroll={updateGraphDimensions}
+	on:touchend="{onMouseUp}"
+	on:mouseup="{onMouseUp}"
+	on:resize="{updateGraphDimensions}"
+	on:scroll="{updateGraphDimensions}"
 />
 
 <style>

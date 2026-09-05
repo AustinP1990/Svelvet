@@ -4,7 +4,12 @@
 	export let hovering: boolean;
 </script>
 
-<div class:linked class:hovering class:connecting class="my-anchor" />
+<div
+	class:linked="{linked}"
+	class:hovering="{hovering}"
+	class:connecting="{connecting}"
+	class="my-anchor"
+></div>
 
 <style>
 	.my-anchor {

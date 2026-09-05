@@ -18,21 +18,21 @@
 	let week = '';
 </script>
 
-<Node id="input" bgColor="black" label="StartNode" borderRadius={10} let:destroy>
+<Node id="input" bgColor="black" label="StartNode" borderRadius="{10}" let:destroy>
 	<div class="node">
-		<input id="text-test" type="text" bind:value={text} />
-		<input id="checkbox-test" type="checkbox" bind:checked />
-		<input type="color" bind:value={color} />
-		<input type="date" bind:value={date} />
-		<input type="datetime-local" bind:value={datetime} />
-		<input type="email" bind:value={email} />
-		<input type="month" bind:value={month} />
-		<input type="number" bind:value={number} />
-		<input type="password" bind:value={password} />
-		<input type="radio" bind:value={radio} />
-		<input type="range" bind:value={range} />
-		<input type="search" bind:value={search} />
-		<input type="tel" bind:value={tel} />
+		<input id="text-test" type="text" bind:value="{text}" />
+		<input id="checkbox-test" type="checkbox" bind:checked="{checked}" />
+		<input type="color" bind:value="{color}" />
+		<input type="date" bind:value="{date}" />
+		<input type="datetime-local" bind:value="{datetime}" />
+		<input type="email" bind:value="{email}" />
+		<input type="month" bind:value="{month}" />
+		<input type="number" bind:value="{number}" />
+		<input type="password" bind:value="{password}" />
+		<input type="radio" bind:value="{radio}" />
+		<input type="range" bind:value="{range}" />
+		<input type="search" bind:value="{search}" />
+		<input type="tel" bind:value="{tel}" />
 		<select id="numberSelect">
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -45,8 +45,8 @@
 			<option value="9">9</option>
 			<option value="10">10</option>
 		</select>
-		<textarea id="textarea-test" />
-		<button on:click={destroy}>Test</button>
+		<textarea id="textarea-test"></textarea>
+		<button on:click="{destroy}">Test</button>
 	</div>
 </Node>
 

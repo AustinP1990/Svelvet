@@ -48,36 +48,36 @@
 	}
 </script>
 
-<div class="contrast-wrapper" class:NE={corner === 'NE'} on:input={updateCustomTheme}>
+<div class="contrast-wrapper" class:NE="{corner === 'NE'}" on:input="{updateCustomTheme}">
 	<label for="themeSelector" class="visually-hidden" aria-hidden="true">Select Theme:</label>
-	<select id="themeSelector" on:change={changeTheme} aria-live="polite" aria-label="Select Theme">
+	<select id="themeSelector" on:change="{changeTheme}" aria-live="polite" aria-label="Select Theme">
 		{#each contrastThemes as contrast (contrast)}
-			<option value={contrast} aria-selected={current === contrast}>{contrast}</option>
+			<option value="{contrast}" aria-selected="{current === contrast}">{contrast}</option>
 		{/each}
 	</select>
 
 	{#if isCustomTheme}
 		<div>
 			<label for="customBgColor">BackGround</label>
-			<input type="color" id="customBgColor" bind:value={bgColor} />
+			<input type="color" id="customBgColor" bind:value="{bgColor}" />
 		</div>
 		<div>
 			<label for="customTextColor">Text</label>
-			<input type="color" id="customTextColor" bind:value={textColor} />
+			<input type="color" id="customTextColor" bind:value="{textColor}" />
 		</div>
 		<div>
 			<!-- changed to customNodeColor from customTextColor -->
 
 			<label for="customNodeColor">Node</label>
-			<input type="color" id="customNodeColor" bind:value={nodeColor} />
+			<input type="color" id="customNodeColor" bind:value="{nodeColor}" />
 		</div>
 		<div>
 			<!-- changed to CustomEdgeColor from customTextColor -->
 			<label for="customEdgeColor">Edge</label>
-			<input type="color" id="customEdgeColor" bind:value={edgeColor} />
+			<input type="color" id="customEdgeColor" bind:value="{edgeColor}" />
 		</div>
 		<button
-			on:click={() => {
+			on:click="{() => {
 				isCustomTheme = false;
 				current = contrastThemes[0];
 				document.documentElement.setAttribute('svelvet-theme', current);
@@ -85,7 +85,7 @@
 				if (themeSelector) {
 					themeSelector.value = current;
 				}
-			}}
+			}}"
 			>Close</button
 		>
 	{/if}

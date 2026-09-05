@@ -2,4 +2,4 @@
 	import { Edge } from '$lib';
 </script>
 
-<Edge width={4} animate />
+<Edge width="{4}" animate />

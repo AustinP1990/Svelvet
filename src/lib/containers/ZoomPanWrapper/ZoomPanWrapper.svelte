@@ -47,7 +47,7 @@
 	on:contextmenu|preventDefault|self
 	on:click|preventDefault|self
 	on:touchstart|preventDefault|self
-	style:transform
+	style:transform="{transform}"
 	class="svelvet-graph-wrapper"
 	role="presentation"
 >

@@ -16,29 +16,35 @@
 	const outputs = generateOutput(inputs, processor);
 </script>
 
-<Svelvet minimap controls width={1000} height={500}>
-	<Node width={200} height={150} useDefaults position={{ x: 100, y: 50 }} bgColor="lightskyblue">
+<Svelvet minimap controls width="{1000}" height="{500}">
+	<Node
+		width="{200}"
+		height="{150}"
+		useDefaults
+		position="{{ x: 100, y: 50 }}"
+		bgColor="lightskyblue"
+	>
 		<div class="wrapper">
 			<h2>New Toggle Component!</h2>
-			<Toggle parameterStore={$inputs.value} />
+			<Toggle parameterStore="{$inputs.value}" />
 		</div>
 		<div class="out">
-			<Anchor outputStore={outputs} output edge={ArrowEdge} />
+			<Anchor outputStore="{outputs}" output edge="{ArrowEdge}" />
 		</div>
 	</Node>
 
 	<Node
-		id={'displayNode'}
+		id="{'displayNode'}"
 		useDefaults
-		width={200}
-		height={100}
-		position={{ x: 650, y: 300 }}
-		bgColor={$outputs ? 'blue' : 'red'}
+		width="{200}"
+		height="{100}"
+		position="{{ x: 650, y: 300 }}"
+		bgColor="{$outputs ? 'blue' : 'red'}"
 		textColor="white"
 	>
 		<h2 id="output-num">{$outputs}</h2>
 		<div class="in">
-			<Anchor inputsStore={inputs} input direction="west" />
+			<Anchor inputsStore="{inputs}" input direction="west" />
 		</div>
 	</Node>
 </Svelvet>

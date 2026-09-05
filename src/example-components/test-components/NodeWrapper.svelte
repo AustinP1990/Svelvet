@@ -12,7 +12,7 @@
 	<div class="header">
 		<h1>{title}</h1>
 		{#if destroy}
-			<button class="destroy" on:click={destroy}>X</button>
+			<button class="destroy" on:click="{destroy}">X</button>
 		{/if}
 	</div>
 	<slot />
@@ -20,15 +20,15 @@
 {#if outputStore && key}
 	<div class="output-anchors">
 		<Anchor
-			id={key}
-			connections={[['output', key]]}
+			id="{key}"
+			connections="{[['output', key]]}"
 			let:linked
 			let:connecting
 			let:hovering
-			{outputStore}
+			outputStore="{outputStore}"
 			output
 		>
-			<CustomAnchor {hovering} {connecting} {linked} />
+			<CustomAnchor hovering="{hovering}" connecting="{connecting}" linked="{linked}" />
 		</Anchor>
 	</div>
 {/if}

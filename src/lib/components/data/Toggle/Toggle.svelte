@@ -20,18 +20,18 @@
 <div
 	class="toggle-wrapper"
 	role="switch"
-	on:keydown|stopPropagation={handleKeyToggle}
-	tabindex={0}
-	aria-checked={$parameterStore}
+	on:keydown|stopPropagation="{handleKeyToggle}"
+	tabindex="{0}"
+	aria-checked="{$parameterStore}"
 	aria-label="Toggle Switch"
 >
 	<label class="switch">
 		<input
 			type="checkbox"
-			on:click|stopPropagation={handleClickToggle}
-			bind:checked={$parameterStore}
+			on:click|stopPropagation="{handleClickToggle}"
+			bind:checked="{$parameterStore}"
 		/>
-		<span class="slider round" style:--prop-toggle-color={color} />
+		<span class="slider round" style:--prop-toggle-color="{color}"></span>
 	</label>
 </div>
 

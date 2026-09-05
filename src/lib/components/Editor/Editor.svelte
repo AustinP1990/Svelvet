@@ -67,16 +67,17 @@
 	}
 </script>
 
-<Node zIndex={Infinity} position={editorPosition} bgColor="white" id="editor">
-	<div on:contextmenu={handleContextMenu} class="editor" role="application">
+<Node zIndex="{Infinity}" position="{editorPosition}" bgColor="white" id="editor">
+	<div on:contextmenu="{handleContextMenu}" class="editor" role="application">
 		<span style="color:white; font-size:45px">Editor</span>
-		<button on:click={() => graph.editing.set(null)} style="position:absolute; top:10px;right:10px;"
-			>X</button
+		<button
+			on:click="{() => graph.editing.set(null)}"
+			style="position:absolute; top:10px;right:10px;">X</button
 		>
 		<!-- <Slider parameterStore={editing.dimensions.width} max={1000} label="" /> -->
-		<TextField placeholder={'Node Label'} />
-		<button on:click={deleteNode}>Delete Node</button>
-		<button on:click={resizeNode}>Resize Node</button>
+		<TextField placeholder="{'Node Label'}" />
+		<button on:click="{deleteNode}">Delete Node</button>
+		<button on:click="{resizeNode}">Resize Node</button>
 	</div>
 </Node>
 

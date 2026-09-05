@@ -32,23 +32,22 @@
 </script>
 
 <button
-	on:click={() => {
+	on:click="{() => {
 		if (!hideable) return;
 		toggleHidden(node);
-	}}
-	class:hidden
+	}}"
+	class:hidden="{hidden}"
 	class="minimap-node"
-	style:z-index={$zIndex}
+	style:z-index="{$zIndex}"
 	style:border-radius="{$borderRadius}px"
-	style:--prop-background-color={nodeColor || $bgColor || (!colorIsTransparent && color) || null}
+	style:--prop-background-color="{nodeColor || $bgColor || (!colorIsTransparent && color) || null}"
 	style:width="{$width}px"
 	style:height="{$height}px"
 	style:transform="rotate({nodeRotation}deg)"
 	style:top="{nodePosition.y - top}px"
 	style:left="{nodePosition.x - left}px"
-	class:hideable
-	aria-label={node.id || 'Minimap node'}
-/>
+	class:hideable="{hideable}"
+	aria-label="{node.id || 'Minimap node'}"></button>
 
 <style>
 	* {

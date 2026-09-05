@@ -38,26 +38,26 @@
 		<Connector />
 
 		<!-- Red Draggable Node -->
-		<Node bgColor="red" inputs={4} position={{ x: 600, y: 200 }}>
-			<button on:click={() => totalNodes++}>Add Node</button>
-			<button style="cursor: pointer;" on:click={saveCurrentGraphState}>SAVE STATE</button>
-			<button on:click={logCurrentGraphState}>Log Current Graph State</button>
+		<Node bgColor="red" inputs="{4}" position="{{ x: 600, y: 200 }}">
+			<button on:click="{() => totalNodes++}">Add Node</button>
+			<button style="cursor: pointer;" on:click="{saveCurrentGraphState}">SAVE STATE</button>
+			<button on:click="{logCurrentGraphState}">Log Current Graph State</button>
 		</Node>
 
 		<!-- TextField Node -->
-		<Node inputs={5} position={{ x: 600, y: 600 }}>
+		<Node inputs="{5}" position="{{ x: 600, y: 600 }}">
 			<TextField placeholder="name" />
 		</Node>
 
 		<!-- Resizable Blue Node -->
-		<Node let:selected dimensions={{ width: 400, height: 100 }}>
-			<div class="node" class:selected>
+		<Node let:selected dimensions="{{ width: 400, height: 100 }}">
+			<div class="node" class:selected="{selected}">
 				<Resizer width height rotation />
 			</div>
 		</Node>
 
 		<!-- Anchored Node -->
-		<Node useDefaults dimensions={{ width: 400, height: 300 }} position={{ x: 100, y: 300 }}>
+		<Node useDefaults dimensions="{{ width: 400, height: 300 }}" position="{{ x: 100, y: 300 }}">
 			<div class="anchor">
 				<Anchor nodeConnect />
 			</div>
@@ -66,7 +66,7 @@
 
 		<!-- Dynamically Added Nodes -->
 		{#each { length: totalNodes } as node}
-			<Node useDefaults position={getSnappedPosition(Math.random() * 500, Math.random() * 500)} />
+			<Node useDefaults position="{getSnappedPosition(Math.random() * 500, Math.random() * 500)}" />
 		{/each}
 
 		<ThemeToggle slot="toggle" />

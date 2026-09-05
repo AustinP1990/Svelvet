@@ -17,18 +17,16 @@
 	};
 </script>
 
-<body>
-	<Svelvet minimap>
-		<!-- <Volume /> -->
-		<Treble />
-		<!-- <Bass /> -->
-		<Audio />
-		<ThemeToggle main="light" alt="dark" slot="toggle" />
-	</Svelvet>
-</body>
+<Svelvet minimap>
+	<!-- <Volume /> -->
+	<Treble />
+	<!-- <Bass /> -->
+	<Audio />
+	<ThemeToggle main="light" alt="dark" slot="toggle" />
+</Svelvet>
 
 <style>
-	body {
+	:global(body) {
 		width: 100vw;
 		height: 100vh;
 		margin: 0;

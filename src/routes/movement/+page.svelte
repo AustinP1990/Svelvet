@@ -6,13 +6,13 @@
 
 <div class="movement-page">
 	<Svelvet minimap title="test">
-		<Node bgColor="red" inputs={4} bind:position>
+		<Node bgColor="red" inputs="{4}" bind:position="{position}">
 			<div class="node-body">
 				<p>{JSON.stringify(position)}</p>
 				<button
-					on:click={() => {
+					on:click="{() => {
 						position = { x: 200, y: 100 };
-					}}>Move</button
+					}}">Move</button
 				>
 			</div>
 		</Node>

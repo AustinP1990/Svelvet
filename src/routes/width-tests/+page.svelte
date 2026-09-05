@@ -5,23 +5,27 @@
 	import PxValue from '../../example-components/PxValue.svelte';
 </script>
 
-<body>
-	<Svelvet theme="dark" minimap>
-		<Node id="no-dimensions" resizable />
-		<Node id="dimensions" dimensions={{ width: 400, height: 200 }} resizable />
-		<Node id="v6-props" width={600} height={300} resizable />
-		<Node id="both" dimensions={{ width: 150, height: 10 }} width={600} height={300} resizable />
-		<Node id="v6-width" width={600} resizable />
-		<Node id="v6-height" height={300} resizable />
-		<Node id="width-only" dimensions={{ width: 100 }} resizable />
-		<FitContent />
-		<PxValue />
-		<Percent />
-	</Svelvet>
-</body>
+<Svelvet theme="dark" minimap>
+	<Node id="no-dimensions" resizable />
+	<Node id="dimensions" dimensions="{{ width: 400, height: 200 }}" resizable />
+	<Node id="v6-props" width="{600}" height="{300}" resizable />
+	<Node
+		id="both"
+		dimensions="{{ width: 150, height: 10 }}"
+		width="{600}"
+		height="{300}"
+		resizable
+	/>
+	<Node id="v6-width" width="{600}" resizable />
+	<Node id="v6-height" height="{300}" resizable />
+	<Node id="width-only" dimensions="{{ width: 100 }}" resizable />
+	<FitContent />
+	<PxValue />
+	<Percent />
+</Svelvet>
 
 <style>
-	body {
+	:global(body) {
 		display: flex;
 		justify-content: center;
 		align-items: center;

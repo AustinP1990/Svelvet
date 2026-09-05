@@ -181,14 +181,14 @@
 
 <div class="wrapper">
 	<div
-		class:picking
-		class:wheel
-		bind:this={picker}
+		class:picking="{picking}"
+		class:wheel="{wheel}"
+		bind:this="{picker}"
 		use:downUp
-		style:width={size ? `${size}px` : '100%'}
-		style:aspect-ratio={1 / 1}
+		style:width="{size ? `${size}px` : '100%'}"
+		style:aspect-ratio="{1 / 1}"
 	>
-		<div class="cursor" style:top="{pickerY}px" style:left="{pickerX}px" />
+		<div class="cursor" style:top="{pickerY}px" style:left="{pickerX}px"></div>
 	</div>
 </div>
 

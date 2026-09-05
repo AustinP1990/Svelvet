@@ -31,7 +31,7 @@
 	let right = direction === 'TD' ? false : true;
 </script>
 
-<div class:selected class="default-node" style:border-radius="{$borderRadius}px">
+<div class:selected="{selected}" class="default-node" style:border-radius="{$borderRadius}px">
 	{#if dynamic}
 		{#each { length: $inputs } as _}
 			<Anchor on:connection on:disconnection />
@@ -40,18 +40,18 @@
 			<Anchor on:connection on:disconnection />
 		{/each}
 	{:else}
-		<div class="input-anchors" class:top class:left>
+		<div class="input-anchors" class:top="{top}" class:left="{left}">
 			{#each { length: $inputs } as _, i (i)}
-				<Anchor on:connection on:disconnection input direction={top ? 'north' : 'west'} />
+				<Anchor on:connection on:disconnection input direction="{top ? 'north' : 'west'}" />
 			{/each}
 		</div>
-		<div class="output-anchors" class:bottom class:right>
+		<div class="output-anchors" class:bottom="{bottom}" class:right="{right}">
 			{#each { length: $outputs } as _, i (i)}
-				<Anchor on:connection on:disconnection output direction={top ? 'south' : 'east'} />
+				<Anchor on:connection on:disconnection output direction="{top ? 'south' : 'east'}" />
 			{/each}
 		</div>
 	{/if}
-	<p style:color={$textColor}>{$label}</p>
+	<p style:color="{$textColor}">{$label}</p>
 
 	{#if $resizable}
 		<Resizer width height rotation />

@@ -627,29 +627,29 @@
 </script>
 
 <div
-	id={anchor?.id}
+	id="{anchor?.id}"
 	class="anchor-wrapper"
 	role="button"
 	tabindex="0"
-	class:locked
-	title={title || ''}
-	on:mouseenter={() => (hovering = true)}
-	on:mouseleave={() => (hovering = false)}
-	on:mousedown|stopPropagation|preventDefault={handleClick}
-	on:mouseup|stopPropagation={handleMouseUp}
-	on:touchstart|stopPropagation|preventDefault={handleClick}
-	on:touchend|stopPropagation={handleMouseUp}
-	bind:this={anchorElement}
+	class:locked="{locked}"
+	title="{title || ''}"
+	on:mouseenter="{() => (hovering = true)}"
+	on:mouseleave="{() => (hovering = false)}"
+	on:mousedown|stopPropagation|preventDefault="{handleClick}"
+	on:mouseup|stopPropagation="{handleMouseUp}"
+	on:touchstart|stopPropagation|preventDefault="{handleClick}"
+	on:touchend|stopPropagation="{handleMouseUp}"
+	bind:this="{anchorElement}"
 >
-	<slot linked={$connectedAnchors?.size >= 1} {hovering} {connecting}>
+	<slot linked="{$connectedAnchors?.size >= 1}" hovering="{hovering}" connecting="{connecting}">
 		{#if !invisible}
 			<DefaultAnchor
-				{output}
-				{input}
-				{connecting}
-				{hovering}
-				{bgColor}
-				connected={$connectedAnchors?.size >= 1}
+				output="{output}"
+				input="{input}"
+				connecting="{connecting}"
+				hovering="{hovering}"
+				bgColor="{bgColor}"
+				connected="{$connectedAnchors?.size >= 1}"
 			/>
 		{/if}
 	</slot>
@@ -659,7 +659,7 @@
 	{@const edge = edgeStore.fetch(anchor, target)}
 	{#if edge && edge.source === anchor}
 		{@const CustomEdge = edge.component}
-		<EdgeContext {edge}>
+		<EdgeContext edge="{edge}">
 			<slot name="edge">
 				{#if CustomEdge}
 					<CustomEdge />
@@ -675,7 +675,7 @@
 	{@const edge = edgeStore.get('cursor')}
 	{#if edge}
 		{@const CustomEdge = edge.component}
-		<EdgeContext {edge}>
+		<EdgeContext edge="{edge}">
 			<slot name="edge">
 				{#if CustomEdge}
 					<CustomEdge />

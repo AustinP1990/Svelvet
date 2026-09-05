@@ -201,41 +201,41 @@
 
 {#if !connected}
 	<!-- this div is wrapping the knob section -->
-	<div class="wrapper" style:color={fontColor} bind:this={knobWrapperElement}>
-		<div class="knob-container" bind:offsetWidth={sliderWidth} style:transform={curAngle}>
+	<div class="wrapper" style:color="{fontColor}" bind:this="{knobWrapperElement}">
+		<div class="knob-container" bind:offsetWidth="{sliderWidth}" style:transform="{curAngle}">
 			<div
-				tabindex={0}
+				tabindex="{0}"
 				id="knob"
 				class="knob"
 				aria-label="knob component"
 				role="slider"
-				aria-valuemin={min}
-				aria-valuemax={max}
-				aria-valuenow={$parameterStore}
-				style:background={knobColor}
-				on:wheel|stopPropagation|preventDefault={(event) => {
+				aria-valuemin="{min}"
+				aria-valuemax="{max}"
+				aria-valuenow="{$parameterStore}"
+				style:background="{knobColor}"
+				on:wheel|stopPropagation|preventDefault="{(event) => {
 					updateValue(Math.sign(event.deltaY));
-				}}
-				on:keydown|stopPropagation={(e) => {
+				}}"
+				on:keydown|stopPropagation="{(e) => {
 					const { key } = e;
 
 					if (isArrow(key)) {
 						e.preventDefault();
 						updateValue(key == 'ArrowDown' ? -1 : key == 'ArrowUp' ? 1 : 0);
 					}
-				}}
+				}}"
 				use:rotatable
-				bind:this={knobElement}
-			/>
-			<div class="indicator" style:background={indicatorColor} />
+				bind:this="{knobElement}"
+			></div>
+			<div class="indicator" style:background="{indicatorColor}"></div>
 		</div>
-		<div class="knob-value" style:color={knobValueColor}>
+		<div class="knob-value" style:color="{knobValueColor}">
 			{$parameterStore.toFixed(fixed)}
 		</div>
 	</div>
 {:else}
 	<div class="wrapper connected">
-		<div class="knob connected" style:--percentage="10%" aria-label={label}>
+		<div class="knob connected" style:--percentage="10%" aria-label="{label}">
 			<p>{label}</p>
 			<p>{currentDegree}</p>
 		</div>

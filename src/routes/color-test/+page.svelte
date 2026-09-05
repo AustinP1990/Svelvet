@@ -24,24 +24,24 @@
 	const output = generateOutput(inputs, processor);
 </script>
 
-<Svelvet minimap controls theme={'light'} width={800} height={800}>
-	<Node width={350} height={100} useDefaults position={{ x: 100, y: 200 }}>
+<Svelvet minimap controls theme="{'light'}" width="{800}" height="{800}">
+	<Node width="{350}" height="{100}" useDefaults position="{{ x: 100, y: 200 }}">
 		<!-- Bind the nodeColor variable to the ColorPicker -->
-		<ColorPicker parameterStore={$inputs.color} />
+		<ColorPicker parameterStore="{$inputs.color}" />
 
 		<Anchor
-			connections={[['output', 'color']]}
+			connections="{[['output', 'color']]}"
 			let:linked
 			let:connecting
-			outputStore={output}
+			outputStore="{output}"
 			output
-			edgeColor={output}
+			edgeColor="{output}"
 			edgeLabel="Dynamic Edges"
 			edgeStyle="bezier"
-			edge={CustomEdge}
+			edge="{CustomEdge}"
 			locked
 		>
-			<ColorAnchor color={output} {connecting} linked />
+			<ColorAnchor color="{output}" connecting="{connecting}" linked />
 		</Anchor>
 	</Node>
 	<!-- <Drawer height={750}/> -->

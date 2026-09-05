@@ -237,56 +237,56 @@
 
 {#if !hidden}
 	<div
-		{id}
+		id="{id}"
 		class="svelvet-node"
 		role="button"
-		class:selected
-		class:locked={$locked || $nodeLock}
+		class:selected="{selected}"
+		class:locked="{$locked || $nodeLock}"
 		style:top="{actualPosition.y}px"
 		style:left="{actualPosition.x}px"
-		style:z-index={$zIndex}
-		{title}
-		style:width={fixedSizing ? $widthStore + 'px' : 'fit-content'}
-		style:height={fixedSizing ? $heightStore + 'px' : 'fit-content'}
+		style:z-index="{$zIndex}"
+		title="{title}"
+		style:width="{fixedSizing ? $widthStore + 'px' : 'fit-content'}"
+		style:height="{fixedSizing ? $heightStore + 'px' : 'fit-content'}"
 		style:transform="rotate({$rotation}deg)"
-		style:--prop-background-color={$bgColor || (isDefault || useDefaults ? null : 'transparent')}
-		style:--prop-text-color={$textColor}
-		style:--prop-border-color={$borderColor}
-		style:--prop-selection-color={$selectionColor}
-		style:--prop-border-radius={$borderRadius
+		style:--prop-background-color="{$bgColor || (isDefault || useDefaults ? null : 'transparent')}"
+		style:--prop-text-color="{$textColor}"
+		style:--prop-border-color="{$borderColor}"
+		style:--prop-selection-color="{$selectionColor}"
+		style:--prop-border-radius="{$borderRadius
 			? `${$borderRadius}px`
 			: isDefault || useDefaults
 			? null
-			: '0px'}
-		style:--prop-border-width={$borderWidth || (isDefault || useDefaults ? null : '0px')}
+			: '0px'}"
+		style:--prop-border-width="{$borderWidth || (isDefault || useDefaults ? null : '0px')}"
 		on:contextmenu|preventDefault|stopPropagation
-		on:mouseup={onMouseUp}
+		on:mouseup="{onMouseUp}"
 		use:grabHandle
-		tabindex={0}
+		tabindex="{0}"
 	>
 		{#if !fixedSizing}
 			<div
 				style:width="fit-content"
 				style:height="fit-content"
-				bind:clientHeight={$heightStore}
-				bind:clientWidth={$widthStore}
+				bind:clientHeight="{$heightStore}"
+				bind:clientWidth="{$widthStore}"
 			>
-				<slot {grabHandle} {selected} {destroy} />
+				<slot grabHandle="{grabHandle}" selected="{selected}" destroy="{destroy}" />
 			</div>
 		{:else}
-			<slot {grabHandle} {selected} {destroy} />
+			<slot grabHandle="{grabHandle}" selected="{selected}" destroy="{destroy}" />
 		{/if}
 
-		<div id={`anchors-west-${node.id}`} class="anchors left">
+		<div id="{`anchors-west-${node.id}`}" class="anchors left">
 			<slot name="anchorWest" />
 		</div>
-		<div id={`anchors-east-${node.id}`} class="anchors right">
+		<div id="{`anchors-east-${node.id}`}" class="anchors right">
 			<slot name="anchorEast" />
 		</div>
-		<div id={`anchors-north-${node.id}`} class="anchors top">
+		<div id="{`anchors-north-${node.id}`}" class="anchors top">
 			<slot name="anchorNorth" />
 		</div>
-		<div id={`anchors-south-${node.id}`} class="anchors bottom">
+		<div id="{`anchors-south-${node.id}`}" class="anchors bottom">
 			<slot name="anchorSouth" />
 		</div>
 	</div>

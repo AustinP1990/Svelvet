@@ -10,32 +10,30 @@
 	let zoom = 0.5;
 </script>
 
-<body>
-	<Svelvet edgeStyle="step" TD {zoom} minimap controls>
-		<Group
-			position={{ x: -150, y: -100 }}
-			width={600}
-			height={700}
-			color="goldenrod"
-			groupName="parameters"
-		>
-			<Thickness />
-			<Noise />
-			<Scale />
-			<CircleColor />
-			<DashCount />
-		</Group>
-		<Output />
-		<span id="state" class="note"> Stateful Anchors</span>
-		<span id="groups" class="note">Group Boxes</span>
-		<ThemeToggle main="dark" alt="light" slot="toggle" />
-	</Svelvet>
-</body>
+<Svelvet edgeStyle="step" TD zoom="{zoom}" minimap controls>
+	<Group
+		position="{{ x: -150, y: -100 }}"
+		width="{600}"
+		height="{700}"
+		color="goldenrod"
+		groupName="parameters"
+	>
+		<Thickness />
+		<Noise />
+		<Scale />
+		<CircleColor />
+		<DashCount />
+	</Group>
+	<Output />
+	<span id="state" class="note"> Stateful Anchors</span>
+	<span id="groups" class="note">Group Boxes</span>
+	<ThemeToggle main="dark" alt="light" slot="toggle" />
+</Svelvet>
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
 	@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-	body {
+	:global(body) {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -51,7 +49,7 @@
 		color: inherit;
 		width: 400px;
 		transform: rotate(-3deg);
-		font-weight: 200px;
+		font-weight: 200;
 		font-size: 40px;
 	}
 	#state {

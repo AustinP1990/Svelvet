@@ -87,18 +87,26 @@
 	}
 </script>
 
-<Node useDefaults id="output" position={{ x: 550, y: 300 }} let:selected>
+<Node useDefaults id="output" position="{{ x: 550, y: 300 }}" let:selected>
 	<div class="contentWrapper">
-		<div class="node" class:selected>
-			<button on:click={() => loadAudio(song)}>Load Audio</button>
-			<button on:click={play}>Play</button>
-			<button on:click={stop}>Stop</button>
+		<div class="node" class:selected="{selected}">
+			<button on:click="{() => loadAudio(song)}">Load Audio</button>
+			<button on:click="{play}">Play</button>
+			<button on:click="{stop}">Stop</button>
 		</div>
 		<div class="audio_controls">
 			<div class="col input-anchors">
 				{#each Object.keys(initialData) as key}
-					<Anchor id={key} let:hovering let:connecting let:linked inputsStore={inputs} {key} input>
-						<CustomAnchor {hovering} {connecting} {linked} />
+					<Anchor
+						id="{key}"
+						let:hovering
+						let:connecting
+						let:linked
+						inputsStore="{inputs}"
+						key="{key}"
+						input
+					>
+						<CustomAnchor hovering="{hovering}" connecting="{connecting}" linked="{linked}" />
 					</Anchor>
 				{/each}
 			</div>

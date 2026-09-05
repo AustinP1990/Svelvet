@@ -2,25 +2,23 @@
 	import { Svelvet, Node, ThemeToggle } from '$lib';
 </script>
 
-<body>
-	<Svelvet controls>
-		<Node
-			--anchor-color="green"
-			--anchor-width="20px"
-			--anchor-radius="2px"
-			id="node1"
-			label="test"
-			resizable
-		/>
-		<Node --node-color="red" --node-border-radius="40px" id="node2" label="test" />
-		<Node label="what" position={{ x: 10, y: 200 }} inputs={3} TD />
-		<Node label="what" position={{ x: 100, y: 200 }} inputs={2} TD />
-		<ThemeToggle slot="toggle" main="light" alt="custom-theme" />
-	</Svelvet>
-</body>
+<Svelvet controls>
+	<Node
+		--anchor-color="green"
+		--anchor-width="20px"
+		--anchor-radius="2px"
+		id="node1"
+		label="test"
+		resizable
+	/>
+	<Node --node-color="red" --node-border-radius="40px" id="node2" label="test" />
+	<Node label="what" position="{{ x: 10, y: 200 }}" inputs="{3}" TD />
+	<Node label="what" position="{{ x: 100, y: 200 }}" inputs="{2}" TD />
+	<ThemeToggle slot="toggle" main="light" alt="custom-theme" />
+</Svelvet>
 
 <style>
-	body {
+	:global(body) {
 		width: 100vw;
 		height: 100vh;
 		padding: 0;

@@ -70,16 +70,15 @@
 		<circle
 			cx="50%"
 			cy="50%"
-			r={circle.r}
-			style:--animation-speed={animation + 's'}
-			stroke={color}
-			style:transform={`rotate(${circle.angle}deg)`}
+			r="{circle.r}"
+			style:--animation-speed="{animation + 's'}"
+			stroke="{color}"
+			style:transform="{`rotate(${circle.angle}deg)`}"
 			fill="none"
-			style:--stroke-width={circle.strokeWidth + 'px'}
-			stroke-width={circle.strokeWidth}
-			stroke-dasharray={circle.dashArray}
-			class:animate
-		/>
+			style:--stroke-width="{circle.strokeWidth + 'px'}"
+			stroke-width="{circle.strokeWidth}"
+			stroke-dasharray="{circle.dashArray}"
+			class:animate="{animate}"></circle>
 	{/each}
 </svg>
 

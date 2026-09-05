@@ -116,15 +116,13 @@
 	}, {});
 </script>
 
-<body>
-	<div class="wrapper">
-		<Svelvet translation={{ x: 0, y: 0 }} width={800} height={500} theme="dark" controls>
-			{#each initialNodes as node}
-				<Node {...node} connections={node.id ? connections[node?.id] : []} />
-			{/each}
-		</Svelvet>
-	</div>
-</body>
+<div class="wrapper">
+	<Svelvet translation="{{ x: 0, y: 0 }}" width="{800}" height="{500}" theme="dark" controls>
+		{#each initialNodes as node}
+			<Node {...node} connections="{node.id ? connections[node?.id] : []}" />
+		{/each}
+	</Svelvet>
+</div>
 
 <style>
 	.wrapper {
@@ -134,7 +132,7 @@
 		overflow: hidden;
 		box-shadow: 0 0 40px 0 rgba(37, 37, 37, 0.5);
 	}
-	body {
+	:global(body) {
 		display: flex;
 		justify-content: center;
 		align-items: center;

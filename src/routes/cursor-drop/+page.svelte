@@ -127,13 +127,13 @@
 <div
 	role="region"
 	aria-label="Node drop zone"
-	class={dropZoneClass}
-	on:dragover={onDragOver}
-	on:dragenter={onDragEnter}
-	on:dragleave={onDragLeave}
-	on:drop={onDrop}
+	class="{dropZoneClass}"
+	on:dragover="{onDragOver}"
+	on:dragenter="{onDragEnter}"
+	on:dragleave="{onDragLeave}"
+	on:drop="{onDrop}"
 >
-	<Svelvet height={800} zoom={0.75} minimap controls>
+	<Svelvet height="{800}" zoom="{0.75}" minimap controls>
 		{#each nodes as node (node.id)}
 			<Node {...node} drop="cursor" />
 		{/each}
@@ -144,36 +144,44 @@
 	<h1>Create Node</h1>
 	<div id="node">
 		<ul>
-			<li class="list-item">Background Color: <input type="color" bind:value={bgColor} /></li>
-			<li class="list-item">Border Color: <input type="color" bind:value={borderColor} /></li>
-			<li class="list-item">Label: <input type="text" bind:value={label} /></li>
-			<li class="list-item">Border Width: <input type="number" bind:value={borderWidth} /></li>
+			<li class="list-item">Background Color: <input type="color" bind:value="{bgColor}" /></li>
+			<li class="list-item">Border Color: <input type="color" bind:value="{borderColor}" /></li>
+			<li class="list-item">Label: <input type="text" bind:value="{label}" /></li>
+			<li class="list-item">Border Width: <input type="number" bind:value="{borderWidth}" /></li>
 			<li class="list-item">
 				<h3>Dimensions:</h3>
 				<label for="width">Height:</label>
-				<input id="width" type="input" bind:value={width} />
+				<input id="width" type="input" bind:value="{width}" />
 				<label for="height">Width:</label>
-				<input id="height" type="input" bind:value={height} />
+				<input id="height" type="input" bind:value="{height}" />
 			</li>
 			<li>
 				<h3>Default Anchors</h3>
 				<label for="#inputAnchor">Input Anchors: </label>
-				<input id="inputAnchor" type="number" bind:value={inputs} />
+				<input id="inputAnchor" type="number" bind:value="{inputs}" />
 				<label for="#outputAnchor">Output Anchors: </label>
-				<input id="outputAnchor" type="number" bind:value={outputs} />
+				<input id="outputAnchor" type="number" bind:value="{outputs}" />
 			</li>
 			<li class="list-item">
 				<h3>Anchor Position:</h3>
 				<label for="#td">TD: </label>
-				<input id="td" type="checkbox" bind:value={nodeTD} on:change={setPositionTD} />
+				<input id="td" type="checkbox" bind:value="{nodeTD}" on:change="{setPositionTD}" />
 				<label for="#lr">LR: </label>
-				<input id="lr" type="checkbox" bind:value={nodeLR} on:change={setPositionLR} />
+				<input id="lr" type="checkbox" bind:value="{nodeLR}" on:change="{setPositionLR}" />
 			</li>
 			<li class="list-item">
-				Locked: <input type="checkbox" bind:value={locked} on:change={handleLockedButtonClick} />
+				Locked: <input
+					type="checkbox"
+					bind:value="{locked}"
+					on:change="{handleLockedButtonClick}"
+				/>
 			</li>
 			<li class="list-item">
-				Centered: <input type="checkbox" bind:value={center} on:change={handleCenterButtonClick} />
+				Centered: <input
+					type="checkbox"
+					bind:value="{center}"
+					on:change="{handleCenterButtonClick}"
+				/>
 			</li>
 			<li class="list-item">
 				<div
@@ -182,13 +190,13 @@
 					aria-label="Drag to create a node"
 					tabindex="0"
 					draggable="true"
-					on:dragstart={onDragStart}
+					on:dragstart="{onDragStart}"
 				>
 					Node
 				</div>
 			</li>
 			<li>
-				<button on:click|stopPropagation={handleClick}>Reset</button>
+				<button on:click|stopPropagation="{handleClick}">Reset</button>
 			</li>
 		</ul>
 	</div>

@@ -202,19 +202,19 @@
 
 <div id="anchorContainer">
 	<!-- On submit resets all the values on the input field in the form to default -->
-	<form on:submit|preventDefault={handleAnchorResetButtonClick}>
+	<form on:submit|preventDefault="{handleAnchorResetButtonClick}">
 		<ul aria-labelledby="select_props">
 			<li class="list-item">
 				<label for="anchorBgColor">Background: </label>
-				<input id="anchorBgColor" class="colorWheel" type="color" bind:value={anchorBgColor} />
+				<input id="anchorBgColor" class="colorWheel" type="color" bind:value="{anchorBgColor}" />
 			</li>
 			<li class="list-item">
 				<label for="invisible">Invisible: </label>
 				<input
 					id="invisible"
 					type="checkbox"
-					bind:value={invisible}
-					on:change={handleInvisibleButtonClick}
+					bind:value="{invisible}"
+					on:change="{handleInvisibleButtonClick}"
 				/>
 			</li>
 			<li class="list-item">
@@ -222,21 +222,26 @@
 				<input
 					id="nodeConnect"
 					type="checkbox"
-					bind:value={nodeConnect}
-					on:change={handleNodeConnectButtonClick}
+					bind:value="{nodeConnect}"
+					on:change="{handleNodeConnectButtonClick}"
 				/>
 			</li>
 			<li class="list-item">
 				<label for="input">Input: </label>
-				<input id="input" type="checkbox" bind:value={input} on:change={handleInputButtonClick} />
+				<input
+					id="input"
+					type="checkbox"
+					bind:value="{input}"
+					on:change="{handleInputButtonClick}"
+				/>
 			</li>
 			<li class="list-item">
 				<label for="output">Output: </label>
 				<input
 					id="output"
 					type="checkbox"
-					bind:value={output}
-					on:change={handleOutputButtonClick}
+					bind:value="{output}"
+					on:change="{handleOutputButtonClick}"
 				/>
 			</li>
 			<li class="list-item">
@@ -244,17 +249,17 @@
 				<input
 					id="multiple"
 					type="checkbox"
-					bind:value={multiple}
-					on:change={handleMultipleButtonClick}
+					bind:value="{multiple}"
+					on:change="{handleMultipleButtonClick}"
 				/>
 			</li>
 			<li class="list-item">
 				<label for="direction">Direction: </label>
 				<select
 					id="direction"
-					bind:this={directionValue}
-					bind:value={direction}
-					on:change={handleDirectionButtonClick}
+					bind:this="{directionValue}"
+					bind:value="{direction}"
+					on:change="{handleDirectionButtonClick}"
 				>
 					<option value="">-</option>
 					<option value="north">North</option>
@@ -269,8 +274,8 @@
 				<input
 					id="dynamic"
 					type="checkbox"
-					bind:value={dynamic}
-					on:change={handleDynamicButtonClick}
+					bind:value="{dynamic}"
+					on:change="{handleDynamicButtonClick}"
 				/>
 			</li>
 
@@ -279,8 +284,8 @@
 				<input
 					id="anchorLocked"
 					type="checkbox"
-					bind:value={anchorLocked}
-					on:change={handleAnchorLockedButtonClick}
+					bind:value="{anchorLocked}"
+					on:change="{handleAnchorLockedButtonClick}"
 				/>
 			</li>
 
@@ -290,7 +295,7 @@
 					id="deleteSelfAnchor"
 					class="deleteAnchor"
 					type="button"
-					on:click|stopPropagation={deleteAnchor}
+					on:click|stopPropagation="{deleteAnchor}"
 				>
 					<Icon icon="arrow_left" />
 				</button>
@@ -299,7 +304,7 @@
 					id="addSelfAnchor"
 					class="addAnchor"
 					type="button"
-					on:click|stopPropagation={addAnchor}
+					on:click|stopPropagation="{addAnchor}"
 				>
 					<Icon icon="arrow_right" />
 				</button>
@@ -309,18 +314,18 @@
 				<p>Right</p>
 			</li>
 			<li class="list-item anchor-directions">
-				<button id="deleteLeftAnchor" class="deleteAnchor" type="button" on:click={deleteAnchor}>
+				<button id="deleteLeftAnchor" class="deleteAnchor" type="button" on:click="{deleteAnchor}">
 					<Icon icon="arrow_left" />
 				</button>
 				<span class="list-item couter">{$leftAnchorCounter}</span>
-				<button id="addLeftAnchor" class="addAnchor" type="button" on:click={addAnchor}>
+				<button id="addLeftAnchor" class="addAnchor" type="button" on:click="{addAnchor}">
 					<Icon icon="arrow_right" />
 				</button>
-				<button id="deleteRightAnchor" class="deleteAnchor" type="button" on:click={deleteAnchor}>
+				<button id="deleteRightAnchor" class="deleteAnchor" type="button" on:click="{deleteAnchor}">
 					<Icon icon="arrow_left" />
 				</button>
 				<span class="list-item couter">{$rightAnchorCounter}</span>
-				<button id="addRightAnchor" class="addAnchor" type="button" on:click={addAnchor}>
+				<button id="addRightAnchor" class="addAnchor" type="button" on:click="{addAnchor}">
 					<Icon icon="arrow_right" />
 				</button>
 			</li>
@@ -329,18 +334,23 @@
 				<p>Bottom</p>
 			</li>
 			<li class="list-item anchor-directions">
-				<button id="deleteTopAnchor" class="deleteAnchor" type="button" on:click={deleteAnchor}>
+				<button id="deleteTopAnchor" class="deleteAnchor" type="button" on:click="{deleteAnchor}">
 					<Icon icon="arrow_left" />
 				</button>
 				<span class="list-item couter">{$topAnchorCounter}</span>
-				<button id="addTopAnchor" class="addAnchor" type="button" on:click={addAnchor}>
+				<button id="addTopAnchor" class="addAnchor" type="button" on:click="{addAnchor}">
 					<Icon icon="arrow_right" />
 				</button>
-				<button id="deleteBottomAnchor" class="deleteAnchor" type="button" on:click={deleteAnchor}>
+				<button
+					id="deleteBottomAnchor"
+					class="deleteAnchor"
+					type="button"
+					on:click="{deleteAnchor}"
+				>
 					<Icon icon="arrow_left" />
 				</button>
 				<span class="list-item couter">{$bottomAnchorCounter}</span>
-				<button id="addBottomAnchor" class="addAnchor" type="button" on:click={addAnchor}>
+				<button id="addBottomAnchor" class="addAnchor" type="button" on:click="{addAnchor}">
 					<Icon icon="arrow_right" />
 				</button>
 			</li>

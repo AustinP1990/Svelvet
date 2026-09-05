@@ -5,17 +5,15 @@
 	let childrenHidden = true;
 </script>
 
-<body>
-	<div class="wrapper">
-		<Svelvet TD theme="dark" width={800} height={500} zoom={0.5} controls title="tests" minimap>
-			<Node connections={[2, 3]} useDefaults width={200} height={100}>
-				<Anchor output>
-					<Edge slot="edge" color="yellow" label="Hello" />
-				</Anchor>
-			</Node>
-		</Svelvet>
-	</div>
-</body>
+<div class="wrapper">
+	<Svelvet TD theme="dark" width="{800}" height="{500}" zoom="{0.5}" controls title="tests" minimap>
+		<Node connections="{[2, 3]}" useDefaults width="{200}" height="{100}">
+			<Anchor output>
+				<Edge slot="edge" color="yellow" label="Hello" />
+			</Anchor>
+		</Node>
+	</Svelvet>
+</div>
 
 <style>
 	.wrapper {
@@ -25,7 +23,7 @@
 		overflow: hidden;
 		box-shadow: 0 0 40px 0 rgba(37, 37, 37, 0.5);
 	}
-	body {
+	:global(body) {
 		display: flex;
 		justify-content: center;
 		align-items: center;

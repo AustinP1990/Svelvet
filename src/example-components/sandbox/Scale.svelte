@@ -14,10 +14,10 @@
 	const output = generateOutput(inputs, procesor);
 </script>
 
-<Node useDefaults id="numCircles" position={{ x: 40, y: 268 }} let:selected>
-	<NodeWrapper title="Scale" outputStore={output} key="scale">
+<Node useDefaults id="numCircles" position="{{ x: 40, y: 268 }}" let:selected>
+	<NodeWrapper title="Scale" outputStore="{output}" key="scale">
 		<div class="node-body">
-			<Slider min={25} max={90} step={1} parameterStore={$inputs.num} />
+			<Slider min="{25}" max="{90}" step="{1}" parameterStore="{$inputs.num}" />
 		</div>
 	</NodeWrapper>
 </Node>

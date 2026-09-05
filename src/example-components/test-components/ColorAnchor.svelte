@@ -6,7 +6,12 @@
 	export let color: CustomWritable<CSSColorString>;
 </script>
 
-<div style:--color={$color} class:linked class:connecting class="my-anchor" />
+<div
+	style:--color="{$color}"
+	class:linked="{linked}"
+	class:connecting="{connecting}"
+	class="my-anchor"
+></div>
 
 <style>
 	.my-anchor {

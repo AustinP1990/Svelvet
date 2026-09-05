@@ -6,12 +6,12 @@
 </script>
 
 <Node let:grabHandle let:selected>
-	<div class="node" use:grabHandle class:selected>
-		<Slider parameterStore={parameter} />
+	<div class="node" use:grabHandle class:selected="{selected}">
+		<Slider parameterStore="{parameter}" />
 		<div class="input-anchors">
 			<Anchor
-				on:disconnection={() => console.log('disconnection')}
-				on:connection={() => console.log('connection')}
+				on:disconnection="{() => console.log('disconnection')}"
+				on:connection="{() => console.log('connection')}"
 				input
 				id="1"
 			/>

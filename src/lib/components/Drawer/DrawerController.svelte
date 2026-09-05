@@ -213,39 +213,39 @@
 	});
 </script>
 
-<nav id="drawerWrapper" bind:this={nav}>
+<nav id="drawerWrapper" bind:this="{nav}">
 	<slot>
 		<button
 			class="drawerBtn"
-			bind:this={drawerBtn}
-			on:click={handleDrawer}
+			bind:this="{drawerBtn}"
+			on:click="{handleDrawer}"
 			aria-label="Open/Close Drawer"
 		>
-			<Icon icon={isOpen ? 'south_east' : 'north_west'} />
+			<Icon icon="{isOpen ? 'south_east' : 'north_west'}" />
 		</button>
-		<ul class="drawerContents" bind:this={drawerContents}>
+		<ul class="drawerContents" bind:this="{drawerContents}">
 			<li class="list-item">
 				<div class="menu">
 					<button
 						class="dropdown"
-						bind:this={nodeBtn}
-						on:click={handleNodeContainer}
+						bind:this="{nodeBtn}"
+						on:click="{handleNodeContainer}"
 						aria-label="Component"
 					>
 						Node
 					</button>
 					<button
 						class="dropdown"
-						bind:this={anchorBtn}
-						on:click={handleAnchorContainer}
+						bind:this="{anchorBtn}"
+						on:click="{handleAnchorContainer}"
 						aria-label="Component"
 					>
 						Anchor
 					</button>
 					<button
 						class="dropdown"
-						bind:this={edgeBtn}
-						on:click={handleEdgeContainer}
+						bind:this="{edgeBtn}"
+						on:click="{handleEdgeContainer}"
 						aria-label="Component"
 					>
 						Edge
@@ -254,19 +254,19 @@
 			</li>
 			<!-- Handle Node Dropdown -->
 			<li class="list-item">
-				<div class="propsContainer nodeContainer" bind:this={nodeContainer}>
+				<div class="propsContainer nodeContainer" bind:this="{nodeContainer}">
 					<DrawerNode />
 				</div>
 			</li>
 			<!-- Handle Anchor Dropdown -->
 			<li class="list-item">
-				<div class="propsContainer anchorContainer" bind:this={anchorContainer}>
+				<div class="propsContainer anchorContainer" bind:this="{anchorContainer}">
 					<DrawerAnchor />
 				</div>
 			</li>
 			<!-- Handle Edge Dropdown -->
 			<li class="list-item">
-				<div class="propsContainer edgeContainer" bind:this={edgeContainer}>
+				<div class="propsContainer edgeContainer" bind:this="{edgeContainer}">
 					<DrawerEdge />
 				</div>
 			</li>
@@ -275,12 +275,12 @@
 					role="presentation"
 					class="defaultNodes"
 					draggable="true"
-					on:dragstart={(e) => {
+					on:dragstart="{(e) => {
 						const target = e.target;
 						if (target instanceof HTMLElement) {
 							handleNodeDragStart(e, target, 'Default Node'); // Nodes seem to be the only thing dragged
 						}
-					}}
+					}}"
 				>
 					Node
 				</div>
