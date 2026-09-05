@@ -12,8 +12,9 @@
 	import { get, writable, readable } from 'svelte/store';
 	import { getRandomColor } from '$lib/utils';
 	import { moveElement, zoomAndTranslate } from '$lib/utils/movers';
+	import { calculateRelativeCursor } from '$lib/utils/calculators';
 	import type { Writable } from 'svelte/store';
-	import type { ComponentType } from 'svelte';
+	import type { ComponentLike } from '$lib/types';
 	import type {
 		Graph,
 		GroupBox,
@@ -98,11 +99,11 @@
 	let pinching = false;
 	let initialFit = false;
 	let graphDimensions: GraphDimensions;
-	let toggleComponent: ComponentType | null = null;
-	let minimapComponent: ComponentType | null = null;
-	let controlsComponent: ComponentType | null = null;
-	let drawerComponent: ComponentType | null = null;
-	let contrastComponent: ComponentType | null = null;
+	let toggleComponent: ComponentLike | null = null;
+	let minimapComponent: ComponentLike | null = null;
+	let controlsComponent: ComponentLike | null = null;
+	let drawerComponent: ComponentLike | null = null;
+	let contrastComponent: ComponentLike | null = null;
 
 	// Subscriptions
 	// This line is a Svelte reactive statement, denoted by $:. It creates a reactivity relationship between dimensions and dimensionsStore.

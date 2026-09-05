@@ -68,9 +68,7 @@
 </script>
 
 <Node zIndex={Infinity} position={editorPosition} bgColor="white" id="editor">
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-
-	<div on:contextmenu={handleContextMenu} class="editor">
+	<div on:contextmenu={handleContextMenu} class="editor" role="application">
 		<span style="color:white; font-size:45px">Editor</span>
 		<button on:click={() => graph.editing.set(null)} style="position:absolute; top:10px;right:10px;"
 			>X</button

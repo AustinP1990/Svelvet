@@ -81,11 +81,12 @@
 				isCustomTheme = false;
 				current = contrastThemes[0];
 				document.documentElement.setAttribute('svelvet-theme', current);
-				const themeSelector = document.querySelector < HTMLSelectElement > '#themeSelector';
+				const themeSelector = document.querySelector('#themeSelector') as HTMLSelectElement | null;
 				if (themeSelector) {
 					themeSelector.value = current;
 				}
-			}}>Close</button
+			}}
+			>Close</button
 		>
 	{/if}
 </div>

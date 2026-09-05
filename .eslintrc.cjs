@@ -29,6 +29,7 @@ module.exports = {
 	],
 	rules: {
 		'no-console': 'off',
+		'svelte/valid-compile': 'off',
 		// 'no-console': 2,
 		'@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }]
 	}

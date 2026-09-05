@@ -4,7 +4,7 @@
 	import { get } from 'svelte/store';
 	import { createNode } from '$lib/utils';
 	import { getContext, onDestroy, onMount, setContext } from 'svelte';
-	import type { ComponentType } from 'svelte';
+	import type { ComponentLike } from '$lib/types';
 	import type { NodeKey, Anchor, AnchorKey } from '$lib/types';
 	import type { Graph, Node as NodeType, NodeConfig, GroupKey } from '$lib/types';
 	import type { Connections, CSSColorString, InitialDimensions } from '$lib/types';
@@ -63,7 +63,7 @@
 	export let editable = true;
 	export let locked = false;
 	export let rotation = 0;
-	export let edge: ComponentType | null = null;
+	export let edge: ComponentLike | null = null;
 	/**
 	 * @default []
 	 * @type Array<string | number | [string | number, string | number]>

@@ -1,12 +1,12 @@
 import { createGraph, createNode, createAnchor, createEdge } from '../creators';
 import type { AnchorKey, GraphKey, NodeConfig, NodeKey, CustomEdgeKey, Anchor } from '$lib/types';
-import type { ComponentType } from 'svelte';
+import type { ComponentLike } from '$lib/types';
 import type { Graph } from '$lib/types/graph';
 
 // added interface for createEdge function
 // interface EdgeDataType {
 //     connection: { source: Anchor; target: Anchor };
-//     component: ComponentType | null;
+//     component: ComponentLike | null;
 // }
 
 // store parameter is supposed to be Graph interface?

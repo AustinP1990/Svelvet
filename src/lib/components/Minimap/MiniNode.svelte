@@ -47,6 +47,7 @@
 	style:top="{nodePosition.y - top}px"
 	style:left="{nodePosition.x - left}px"
 	class:hideable
+	aria-label={node.id || 'Minimap node'}
 />
 
 <style>

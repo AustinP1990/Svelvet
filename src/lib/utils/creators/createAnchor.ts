@@ -2,7 +2,7 @@ import type { Anchor, Node, Direction, AnchorKey, Graph } from '$lib/types';
 import { writable, derived, get } from 'svelte/store';
 import type { Writable, Readable } from 'svelte/store';
 import type { CustomWritable, CSSColorString, XYPair } from '$lib/types';
-import type { ComponentType } from 'svelte';
+import type { ComponentLike } from '$lib/types';
 import { calculateRelativePosition } from '..';
 import { directionVectors } from '$lib/constants';
 
@@ -13,7 +13,7 @@ export function createAnchor(
 	position: XYPair,
 	dimensions: { width: number; height: number },
 	store: Anchor['store'],
-	edge: ComponentType | null,
+	edge: ComponentLike | null,
 	type: 'input' | 'output' | null,
 	direction?: Direction,
 	dynamic?: boolean,

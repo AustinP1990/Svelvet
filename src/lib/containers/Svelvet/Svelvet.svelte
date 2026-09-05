@@ -5,7 +5,7 @@
 	import { createGraph } from '$lib/utils/';
 	import { graphStore } from '$lib/stores';
 	import { reloadStore } from '$lib/utils/savers/reloadStore';
-	import type { ComponentType } from 'svelte';
+	import type { ComponentLike } from '$lib/types';
 	import type {
 		Graph as GraphType,
 		EdgeStyle,
@@ -65,7 +65,7 @@
 	export let selectionColor: CSSColorString = 'lightblue';
 	export let edgeStyle: EdgeStyle = 'bezier';
 	export let endStyles: Array<EndStyle> = [null, null];
-	export let edge: ComponentType | null = null;
+	export let edge: ComponentLike | null = null;
 	/**
 	 * @default false
 	 * @description Boolean controlling whether or not Shift + Click enables the selection of multiple components.

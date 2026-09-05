@@ -3,7 +3,7 @@
 	import { writable } from 'svelte/store';
 	import type { CSSColorString, Direction, AnchorDrawerConfig, AnchorProps } from '$lib/types';
 	import { addProps } from '$lib/utils';
-	import type { ComponentType } from 'svelte';
+	import type { ComponentLike } from '$lib/types';
 	import Icon from '$lib/assets/icons/Icon.svelte';
 
 	// Local stores for anchor counts
@@ -25,7 +25,7 @@
 	let anchorLocked: boolean | undefined;
 	let anchorBgColor: CSSColorString | undefined;
 	let directionValue: HTMLElement;
-	let edgeProps: ComponentType | undefined = undefined;
+	let edgeProps: ComponentLike | undefined = undefined;
 
 	// Array of props for pending anchors based on direction
 	let anchorsCreated: { [key: string]: AnchorDrawerConfig[] } = {

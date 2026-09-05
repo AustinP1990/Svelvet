@@ -3,11 +3,11 @@ import { writable } from 'svelte/store';
 import * as s from '$lib/constants/styles';
 import type { EdgeLabel, EdgeKey } from '$lib/types';
 import { sortEdgeKey } from '$lib/utils/helpers/sortKey';
-import type { ComponentType } from 'svelte';
+import type { ComponentLike } from '$lib/types';
 
 export function createEdge(
 	connection: { source: Anchor; target: Anchor },
-	component: ComponentType | null,
+	component: ComponentLike | null,
 	config?: EdgeConfig
 ): WritableEdge {
 	const { source, target } = connection;

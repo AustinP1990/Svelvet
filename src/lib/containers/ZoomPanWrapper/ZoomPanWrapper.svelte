@@ -4,6 +4,7 @@
 	import { initialClickPosition } from '$lib/stores/CursorStore';
 	import { updateTranslation } from '$lib/utils';
 	import { get } from 'svelte/store';
+	import { onDestroy } from 'svelte';
 
 	const graph = getContext<Graph>('graph'); //graph is an object with
 	//console.log('this is our graph', graph); Upon cl, we sa wthe graph object but it does not show the edges, transforms, nodes
@@ -11,6 +12,12 @@
 	const scale = transforms.scale; //zoom
 	const translation = transforms.translation; //x and y coordinates
 	const cursor = graph.cursor; //used to recognize dragging or dropping the graph
+	let currentCursor = get(cursor);
+	// $cursor was not updating early enough for the first frame, so we subscribe to it directly
+	const unsubscribeCursor = cursor.subscribe((value) => {
+		currentCursor = value;
+	});
+	onDestroy(unsubscribeCursor);
 
 	export let isMovable: boolean; //whether the graph can be moved or not
 	let animationFrameId: number; //stores the ID and is used for animations in the browser
@@ -31,7 +38,7 @@
 	}
 
 	function translate() {
-		$translation = updateTranslation(get(initialClickPosition), $cursor, transforms);
+		$translation = updateTranslation(get(initialClickPosition), currentCursor, transforms);
 		animationFrameId = requestAnimationFrame(translate);
 	}
 </script>

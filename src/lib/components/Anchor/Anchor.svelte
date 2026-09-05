@@ -24,7 +24,7 @@
 	} from '$lib/types';
 	import type { InputType, NodeKey, OutputStore, InputStore, ConnectingFrom } from '$lib/types';
 	import type { FlowChart } from '$lib/types/parser';
-	import type { ComponentType } from 'svelte';
+	import type { ComponentLike } from '$lib/types';
 	import type { Writable, Readable } from 'svelte/store';
 
 	let animationFrameId: number;
@@ -55,7 +55,7 @@
 	const mounted = getContext<Writable<number | true>>('mounted');
 	const graph = getContext<Graph>('graph');
 	const nodeStore = getContext<Graph['nodes']>('nodeStore');
-	const graphEdge = getContext<ComponentType>('graphEdge');
+	const graphEdge = getContext<ComponentLike>('graphEdge');
 	const nodeConnectEvent = getContext<Writable<null | MouseEvent>>('nodeConnectEvent');
 	const anchorsMounted = getContext<Writable<number>>('anchorsMounted');
 	const flowChart = getContext<FlowChart | undefined>('flowchart');
@@ -76,7 +76,7 @@
 	 * based on the relative positioning of connected Nodes
 	 */
 	export let dynamic = nodeDynamic || false;
-	export let edge: ComponentType | null = null;
+	export let edge: ComponentLike | null = null;
 	export let inputsStore: InputStore | null = null;
 	export let key: string | number | null = null;
 	export let outputStore: OutputStore | null = null;
