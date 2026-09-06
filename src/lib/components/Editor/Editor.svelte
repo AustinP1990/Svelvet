@@ -20,6 +20,7 @@
 
 	function handleContextMenu(event: MouseEvent) {
 		event.preventDefault();
+		if (!graph.editable) return;
 		editorPosition = { x: event.clientX, y: event.clientY };
 		graph.editing.set(editing);
 	}

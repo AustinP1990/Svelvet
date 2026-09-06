@@ -678,7 +678,7 @@
 	tabindex="{0}"
 >
 	<GraphRenderer isMovable="{isMovable}">
-		{#if $editing}
+		{#if $editing && graph.editable}
 			<Editor editing="{$editing}" />
 		{/if}
 		<slot />

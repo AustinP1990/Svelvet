@@ -130,7 +130,7 @@
 					? { x: get(groupBox.position).x + position.x, y: get(groupBox.position).y + position.y }
 					: position,
 			dimensions: initialDimensions,
-			editable: editable || graph.editable,
+			editable: editable && graph.editable,
 			label,
 			group,
 			resizable,
@@ -217,7 +217,7 @@
 		node.resizable.set(resizable);
 	}
 	$: if (node) {
-		node.editable.set(editable);
+		node.editable.set(editable && graph.editable);
 	}
 	$: if (node) {
 		node.locked.set(locked);
