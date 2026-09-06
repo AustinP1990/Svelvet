@@ -224,6 +224,7 @@ const svelvetProps: SvelvetConfig = {
 	export let minimap = false;
 	export let translation: XYPair = { x: 0, y: 0 };
 	export let controls = false;
+    export let keyControls = true;
 	export let edge: ComponentLike | null = null;
 	export let edgeStyle: EdgeStyle = 'bezier';
 	export let snapTo = 0;
@@ -248,6 +249,7 @@ const svelvetProps: SvelvetConfig = {
 		minimap,
 		translation,
 		controls,
+        keyControls,
 		edge,
 		edgeStyle,
 		snapTo,

@@ -3,6 +3,8 @@
 	import FlowChart from '$lib/components/FlowChart/FlowChart.svelte';
 	import { createEventDispatcher, onMount, setContext } from 'svelte';
 	import { createGraph } from '$lib/utils/';
+	import { setSnapTo } from '$lib/utils/snapGrid';
+	import { GRID_SCALE } from '$lib/constants';
 	import { graphStore } from '$lib/stores';
 	import { reloadStore } from '$lib/utils/savers/reloadStore';
 	import type { ComponentLike } from '$lib/types';
@@ -30,6 +32,11 @@
 	 */
 	export let theme = 'light';
 	export let id: number | string = 0;
+
+    /**
+     * @default 0
+     * @description Specifies the grid size to which nodes will snap when being moved.
+     */
 	export let snapTo = 0;
 
 	/**
@@ -74,6 +81,11 @@
 	export let disableSelection = false;
 	export let mermaidConfig: Record<string, NodeConfig> = {};
 	/**
+     * @default true
+     * @description Controls whether keyboard shortcuts are enabled for panning and zooming the graph.
+     */
+    export let keyControls = true;
+    /**
 	 * @default { x: 0, y: 0 }
 	 * @type { x: number, y: number }
 	 * @description The initial translation of the graph. This value
@@ -119,6 +131,8 @@
 	// let graph: GraphType;
 	let graph: GraphType | null = null;
 	let direction: 'TD' | 'LR' = TD ? 'TD' : 'LR';
+
+	$: setSnapTo(snapTo);
 
 	setContext('snapTo', snapTo);
 	setContext('edgeStyle', edgeStyle);
@@ -200,6 +214,7 @@
 		height="{height}"
 		toggle="{toggle}"
 		backgroundExists="{backgroundExists}"
+		gridWidth="{snapTo || GRID_SCALE}"
 		minimap="{minimap}"
 		graph="{graph}"
 		fitView="{fitView}"
@@ -210,6 +225,7 @@
 		controls="{controls}"
 		selectionColor="{selectionColor}"
 		disableSelection="{disableSelection}"
+        keyControls="{keyControls}"
 		trackpadPan="{trackpadPan}"
 		modifier="{modifier}"
 		title="{title}"

@@ -5,7 +5,7 @@
 	import { initialClickPosition, tracking } from '$lib/stores/CursorStore'; //these are like stores that track cursor position and whether an element is being dragged or moved
 	import { captureGroup, moveNodes } from '$lib/utils/movers/';
 	import { getContext } from 'svelte';
-	import type { Graph } from '$lib/types'; //Graph type object
+	import type { Graph, InitialDimensions } from '$lib/types'; //Graph type object
 
 	const graph = getContext<Graph>('graph');
 	const snapTo = getContext<number>('snapTo');

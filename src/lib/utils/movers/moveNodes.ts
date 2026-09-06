@@ -76,21 +76,22 @@ export function moveNodes(graph: Graph, snapTo: number) {
 	function moveGroup() {
 		const cursorPosition = get(graph.cursor);
 
-		let newX = cursorPosition.x - initialClickX;
-		let newY = cursorPosition.y - initialClickY;
+		const delta = {
+			x: cursorPosition.x - initialClickX,
+			y: cursorPosition.y - initialClickY
+		};
 
 		//Snap to grid Logic
-		if (snapTo) {
-			//snaps to nearest grid point
-			const snappedPosition = getSnappedPosition(newX, newY);
-			newX = snappedPosition.x;
-			newY = snappedPosition.y;
+		if (snapTo && initialPositions.length > 0) {
+			const initialPosition = initialPositions[0];
+			const snappedTarget = getSnappedPosition(
+				initialPosition.x + delta.x,
+				initialPosition.y + delta.y
+			);
 
-			// newX -= newX % snapTo;
-			// newY -= newY % snapTo;
+			delta.x = snappedTarget.x - initialPosition.x;
+			delta.y = snappedTarget.y - initialPosition.y;
 		}
-
-		const delta = { x: newX, y: newY };
 
 		nodeGroupArray.forEach((node, index) => {
 			const { group, position } = node;
