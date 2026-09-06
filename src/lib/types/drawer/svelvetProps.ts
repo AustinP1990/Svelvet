@@ -7,7 +7,7 @@ export interface SvelvetConfig {
 	minimap: boolean;
 	translation: XYPair;
 	controls: boolean;
-    keyControls: boolean;
+	keyControls: boolean;
 	edge: ComponentLike | null;
 	edgeStyle: EdgeStyle;
 	snapTo: number;

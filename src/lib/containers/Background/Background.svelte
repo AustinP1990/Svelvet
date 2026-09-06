@@ -42,7 +42,7 @@
 	$: gridScale = scale * gridWidth; // Update grid scale when scale changes
 	$: radius = (scale * dotSize) / 2; // Update dot radius when scale changes
 	$: dotCenterCoordinate = 0; // center the dot on 0,0 to align with snapping
-    // $: dotCenterCoordinate = gridScale / 2; // Place dot in the center of the grid
+	// $: dotCenterCoordinate = gridScale / 2; // Place dot in the center of the grid
 
 	// Update background offset when scale or offset changes
 	$: {

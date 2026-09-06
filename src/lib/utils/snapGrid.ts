@@ -17,14 +17,14 @@ export function setSnapTo(snapTo: number): void {
  */
 export function getSnappedPosition(x: number, y: number): { x: number; y: number } {
 	if (snapSize == 0) {
-        return {
-            x: x,
-            y: y
-        };
-    } else {
-        return {
-            x: Math.round(x / snapSize) * snapSize,
-            y: Math.round(y / snapSize) * snapSize
-	    };
-    }
+		return {
+			x: x,
+			y: y
+		};
+	} else {
+		return {
+			x: Math.round(x / snapSize) * snapSize,
+			y: Math.round(y / snapSize) * snapSize
+		};
+	}
 }

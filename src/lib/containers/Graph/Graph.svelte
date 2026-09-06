@@ -56,14 +56,14 @@
 	export let title: string;
 	export let drawer = false;
 	export let contrast = false;
-    export let keyControls = true;
+	export let keyControls = true;
 
-    // These variables track whether features were originally turned on
-    // at the first keypress. This way, keys can toggle features like
-    // the minimap only if they were initially enabled.
-    let initialMinimap: boolean;
-    let initialControls: boolean;
-    let initialDrawer: boolean;
+	// These variables track whether features were originally turned on
+	// at the first keypress. This way, keys can toggle features like
+	// the minimap only if they were initially enabled.
+	let initialMinimap: boolean;
+	let initialControls: boolean;
+	let initialDrawer: boolean;
 
 	// Log drawer prop initially
 	// console.log('Initial Graph drawer prop:', drawer);
@@ -398,16 +398,16 @@
 		// We dont want to prevent users from interacting with inputs
 		if (target.tagName == 'INPUT' || target.tagName == 'TEXTAREA') return;
 
-        // Remember if the controls or minimap were already open
-        if (initialControls === undefined) {
-            initialControls = controls;
-        }
-        if (initialMinimap === undefined) {
-            initialMinimap = minimap;
-        }
-        if (initialDrawer === undefined) {
-            initialDrawer = drawer;
-        }
+		// Remember if the controls or minimap were already open
+		if (initialControls === undefined) {
+			initialControls = controls;
+		}
+		if (initialMinimap === undefined) {
+			initialMinimap = minimap;
+		}
+		if (initialDrawer === undefined) {
+			initialDrawer = drawer;
+		}
 
 		if (code === 'KeyA' && e[`${modifier}Key`] && !disableSelection) {
 			const unlockedNodes = graph.nodes.getAll().filter((node) => !get(node.locked));
