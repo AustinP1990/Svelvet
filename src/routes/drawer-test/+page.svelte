@@ -3,6 +3,6 @@
 	import ThemeToggle from '$lib/components/ThemeToggle/ThemeToggle.svelte';
 </script>
 
-<Drawer height={1200} zoom={0.7} controls>
+<Drawer height="{1200}" zoom="{0.7}" controls>
 	<ThemeToggle main="light" alt="dark" slot="toggle" />
 </Drawer>

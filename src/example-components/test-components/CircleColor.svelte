@@ -17,7 +17,7 @@
 	const output = generateOutput(inputs, procesor);
 </script>
 
-<Node useDefaults rotation={-5} position={{ x: 50, y: 400 }} let:selected>
+<Node useDefaults rotation="{-5}" position="{{ x: 50, y: 400 }}" let:selected>
 	<p class="note" id="custom">
 		Built In
 		<br />
@@ -25,23 +25,23 @@
 	</p>
 	<NodeWrapper title="Color">
 		<div class="node-body">
-			<ColorPicker parameterStore={$inputs.color} />
+			<ColorPicker parameterStore="{$inputs.color}" />
 		</div>
 	</NodeWrapper>
 	<div class="output-anchors">
 		<Anchor
-			connections={[['output', 'color']]}
+			connections="{[['output', 'color']]}"
 			let:linked
 			let:connecting
-			outputStore={output}
+			outputStore="{output}"
 			output
-			edgeColor={output}
+			edgeColor="{output}"
 			edgeLabel="Dynamic Edges"
 			edgeStyle="bezier"
-			edge={CustomEdge}
+			edge="{CustomEdge}"
 			locked
 		>
-			<ColorAnchor color={output} {connecting} {linked} />
+			<ColorAnchor color="{output}" connecting="{connecting}" linked="{linked}" />
 		</Anchor>
 	</div>
 	<Resizer rotation />

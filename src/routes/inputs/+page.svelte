@@ -3,14 +3,12 @@
 	import InputNode from '../../example-components/InputNode.svelte';
 </script>
 
-<body>
-	<Svelvet>
-		<InputNode />
-	</Svelvet>
-</body>
+<Svelvet>
+	<InputNode />
+</Svelvet>
 
 <style>
-	body {
+	:global(body) {
 		width: 100vw;
 		height: 100vh;
 		margin: 0;

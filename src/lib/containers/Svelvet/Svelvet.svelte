@@ -1,12 +1,13 @@
 <script context="module" lang="ts">
-	
 	import Graph from '../Graph/Graph.svelte';
 	import FlowChart from '$lib/components/FlowChart/FlowChart.svelte';
 	import { createEventDispatcher, onMount, setContext } from 'svelte';
 	import { createGraph } from '$lib/utils/';
+	import { setSnapTo } from '$lib/utils/snapGrid';
+	import { GRID_SCALE } from '$lib/constants';
 	import { graphStore } from '$lib/stores';
 	import { reloadStore } from '$lib/utils/savers/reloadStore';
-	import type { ComponentType } from 'svelte';
+	import type { ComponentLike } from '$lib/types';
 	import type {
 		Graph as GraphType,
 		EdgeStyle,
@@ -20,7 +21,6 @@
 </script>
 
 <script lang="ts">
-	
 	// Props
 	export let mermaid = '';
 	/**
@@ -32,11 +32,13 @@
 	 */
 	export let theme = 'light';
 	export let id: number | string = 0;
+
+    /**
+     * @default 0
+     * @description Specifies the grid size to which nodes will snap when being moved.
+     */
 	export let snapTo = 0;
 
-	
-   
-	
 	/**
 	 * @default 1
 	 * @description Sets initial zoom level of the graph. This value
@@ -51,7 +53,7 @@
 	export let minimap = false;
 	export let controls = false;
 	export let toggle = false;
-	export let drawer: boolean = false;
+	export let drawer = false;
 	export let contrast = false;
 
 	// $: console.log("Svelvet drawer prop:", drawer);
@@ -70,7 +72,7 @@
 	export let selectionColor: CSSColorString = 'lightblue';
 	export let edgeStyle: EdgeStyle = 'bezier';
 	export let endStyles: Array<EndStyle> = [null, null];
-	export let edge: ComponentType | null = null;
+	export let edge: ComponentLike | null = null;
 	/**
 	 * @default false
 	 * @description Boolean controlling whether or not Shift + Click enables the selection of multiple components.
@@ -79,6 +81,11 @@
 	export let disableSelection = false;
 	export let mermaidConfig: Record<string, NodeConfig> = {};
 	/**
+     * @default true
+     * @description Controls whether keyboard shortcuts are enabled for panning and zooming the graph.
+     */
+    export let keyControls = true;
+    /**
 	 * @default { x: 0, y: 0 }
 	 * @type { x: number, y: number }
 	 * @description The initial translation of the graph. This value
@@ -124,6 +131,8 @@
 	// let graph: GraphType;
 	let graph: GraphType | null = null;
 	let direction: 'TD' | 'LR' = TD ? 'TD' : 'LR';
+
+	$: setSnapTo(snapTo);
 
 	setContext('snapTo', snapTo);
 	setContext('edgeStyle', edgeStyle);
@@ -179,50 +188,52 @@
 		source: [string | number, string | number],
 		target: [string | number, string | number]
 	) {
-		const sourceNodeKey: NodeKey = `N-${source[0]}`;
-		const sourceNode = graph.nodes.get(sourceNodeKey);
-		if (!sourceNode) return;
-		const sourceAnchor = sourceNode.anchors.get(`A-${source[1]}/N-${source[0]}`);
-		if (!sourceAnchor) return;
-		const targetNodeKey: NodeKey = `N-${target[0]}`;
-		const targetNode = graph.nodes.get(targetNodeKey);
-		if (!targetNode) return;
-		const targetAnchor = targetNode.anchors.get(`A-${target[1]}/N-${target[0]}`);
-		if (!targetAnchor) return;
-		const edgeKey = graph.edges.match(sourceAnchor, targetAnchor);
-		if (!edgeKey) return;
-		graph.edges.delete(edgeKey[0]);
-		
+		if (graph !== null && graph !== undefined) {
+			// Just in case graph is not initialized
+			const sourceNodeKey: NodeKey = `N-${source[0]}`;
+			const sourceNode = graph.nodes.get(sourceNodeKey);
+			if (!sourceNode) return;
+			const sourceAnchor = sourceNode.anchors.get(`A-${source[1]}/N-${source[0]}`);
+			if (!sourceAnchor) return;
+			const targetNodeKey: NodeKey = `N-${target[0]}`;
+			const targetNode = graph.nodes.get(targetNodeKey);
+			if (!targetNode) return;
+			const targetAnchor = targetNode.anchors.get(`A-${target[1]}/N-${target[0]}`);
+			if (!targetAnchor) return;
+			const edgeKey = graph.edges.match(sourceAnchor, targetAnchor);
+			if (!edgeKey) return;
+			graph.edges.delete(edgeKey[0]);
+		}
 	}
-	
 </script>
 
 <!-- Aqui se renderiza el grafico -->
 {#if graph}
 	<Graph
-	
-		{width}
-		{height}
-		{toggle}
-		{backgroundExists}
-		{minimap}
-		{graph}
-		{fitView}
-		{fixedZoom}
-		{pannable}
-		{theme}
-		{drawer}
-		{controls}
-		{selectionColor}
-		{disableSelection}
-		{trackpadPan}
-		{modifier}
-		{title}
-		{contrast}
+		width="{width}"
+		height="{height}"
+		toggle="{toggle}"
+		backgroundExists="{backgroundExists}"
+		gridWidth="{snapTo || GRID_SCALE}"
+		minimap="{minimap}"
+		graph="{graph}"
+		fitView="{fitView}"
+		fixedZoom="{fixedZoom}"
+		pannable="{pannable}"
+		theme="{theme}"
+		drawer="{drawer}"
+		controls="{controls}"
+		selectionColor="{selectionColor}"
+		disableSelection="{disableSelection}"
+        keyControls="{keyControls}"
+		trackpadPan="{trackpadPan}"
+		modifier="{modifier}"
+		title="{title}"
+		contrast="{contrast}"
 		on:edgeDrop
 	>
 		{#if mermaid.length}
-			<FlowChart {mermaid} {mermaidConfig} />
+			<FlowChart mermaid="{mermaid}" mermaidConfig="{mermaidConfig}" />
 		{/if}
 		<slot />
 		<slot name="minimap" slot="minimap" />
@@ -231,14 +242,13 @@
 		<slot name="toggle" slot="toggle" />
 		<slot name="drawer" slot="drawer" />
 		<slot name="contrast" slot="contrast" />
-		
 	</Graph>
 {:else}
 	<div
 		class="svelvet-temp"
-		style:width={width ? width + 'px' : '100%'}
-		style:height={height ? height + 'px' : '100%'}
-	/>
+		style:width="{width ? width + 'px' : '100%'}"
+		style:height="{height ? height + 'px' : '100%'}"
+	></div>
 {/if}
 
 <style>

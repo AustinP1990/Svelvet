@@ -328,14 +328,14 @@
 </script>
 
 <div
-role="presentation"
+	role="presentation"
 	id="drop_zone"
-	on:dragenter={handleDragEnter}
-	on:dragleave={handleDragLeave}
-	on:drop={handleDragDrop}
-	on:dragover={onDragOver}
+	on:dragenter="{handleDragEnter}"
+	on:dragleave="{handleDragLeave}"
+	on:drop="{handleDragDrop}"
+	on:dragover="{onDragOver}"
 >
-	<Svelvet height={600} zoom={0.7} minimap controls>
+	<Svelvet height="{600}" zoom="{0.7}" minimap controls>
 		{#each defaultNodes as node}
 			<Node {...node} drop="cursor" />
 		{/each}
@@ -360,32 +360,33 @@ role="presentation"
 				<div
 					class="defaultNodes"
 					draggable="true"
-					on:dragstart={handleDragStart}
-					on:dragend={handleDragEnd}
+					on:dragstart="{handleDragStart}"
+					on:dragend="{handleDragEnd}"
+					role="note"
 				>
 					Node
 				</div>
 			</li>
 			<li class="list-item">
 				<label for="bgColor">Background Color : </label>
-				<input id="bgColor" class="colorWheel" type="color" bind:value={bgColor} />
+				<input id="bgColor" class="colorWheel" type="color" bind:value="{bgColor}" />
 			</li>
 			<li class="list-item">
 				<label for="borderColor">Border Color : </label>
-				<input id="borderColor" class="colorWheel" type="color" bind:value={borderColor} />
+				<input id="borderColor" class="colorWheel" type="color" bind:value="{borderColor}" />
 			</li>
 			<li class="list-item">
 				<label for="useDefaults">useDefaults: </label>
 				<input
 					id="useDefaults"
 					type="checkbox"
-					bind:value={useDefaults}
-					on:change={handleUseDefaultsButtonClick}
+					bind:value="{useDefaults}"
+					on:change="{handleUseDefaultsButtonClick}"
 				/>
 			</li>
 			<li class="list-item">
 				<label for="label">Label : </label>
-				<input id="label" type="text" bind:value={label} />
+				<input id="label" type="text" bind:value="{label}" />
 			</li>
 
 			<li class="list-item">
@@ -393,25 +394,25 @@ role="presentation"
 			</li>
 			<li class="list-item">
 				<label for="width">Width:</label>
-				<input id="width" class="inputField" type="input" bind:value={width} />
+				<input id="width" class="inputField" type="input" bind:value="{width}" />
 				<label for="height">Height:</label>
-				<input id="height" class="inputField" type="input" bind:value={height} />
+				<input id="height" class="inputField" type="input" bind:value="{height}" />
 			</li>
 			<li class="list-item">
 				<h4>Default Anchors:</h4>
 			</li>
 			<li class="list-item">
 				<label for="inputAnchor">Input Anchors: </label>
-				<input id="inputAnchor" class="inputField" type="number" bind:value={inputs} />
+				<input id="inputAnchor" class="inputField" type="number" bind:value="{inputs}" />
 				<label for="outputAnchor">Output Anchors: </label>
-				<input id="outputAnchor" class="inputField" type="number" bind:value={outputs} />
+				<input id="outputAnchor" class="inputField" type="number" bind:value="{outputs}" />
 			</li>
 			<li class="list-item">
 				<label for="anchorPositon">Anchor Position: </label>
 				<select
 					id="anchorPosition"
-					bind:value={nodeDirection}
-					on:change={handleAnchorPositionButton}
+					bind:value="{nodeDirection}"
+					on:change="{handleAnchorPositionButton}"
 				>
 					<option value="">-</option>
 					<option value="LR">LR</option>
@@ -419,7 +420,7 @@ role="presentation"
 				</select>
 			</li>
 			<li class="list-item">
-				<button class="nodeResetBtn btn" on:click|stopPropagation={handleNodeResetButtonClick}
+				<button class="nodeResetBtn btn" on:click|stopPropagation="{handleNodeResetButtonClick}"
 					>Reset</button
 				>
 			</li>
@@ -428,24 +429,29 @@ role="presentation"
 			</li>
 			<li class="list-item">
 				<label for="locked">Locked: </label>
-				<input id="label" type="checkbox" bind:value={locked} on:change={handleLockedButtonClick} />
+				<input
+					id="label"
+					type="checkbox"
+					bind:value="{locked}"
+					on:change="{handleLockedButtonClick}"
+				/>
 			</li>
 			<li class="list-item">
 				<label for="centered">Centered: </label>
 				<input
 					id="centered"
 					type="checkbox"
-					bind:value={center}
-					on:change={handleCenterButtonClick}
+					bind:value="{center}"
+					on:change="{handleCenterButtonClick}"
 				/>
 			</li>
 			<li class="list-item">
 				<label for="rotation">Rotation:</label>
-				<input id="rotation" class="inputField" type="number" bind:value={rotation} />
+				<input id="rotation" class="inputField" type="number" bind:value="{rotation}" />
 			</li>
 			<li class="list-item">
 				<label for="zIndex">zIndex:</label>
-				<input id="zIndex" class="inputField" type="number" bind:value={zIndex} />
+				<input id="zIndex" class="inputField" type="number" bind:value="{zIndex}" />
 			</li>
 		</ul>
 	</div>
@@ -459,15 +465,20 @@ role="presentation"
 				<ul>
 					<li class="list-item">
 						<label for="anchorBgColor">Background Color : </label>
-						<input id="anchorBgColor" class="colorWheel" type="color" bind:value={anchorBgColor} />
+						<input
+							id="anchorBgColor"
+							class="colorWheel"
+							type="color"
+							bind:value="{anchorBgColor}"
+						/>
 					</li>
 					<li class="list-item">
 						<label for="invisible">Invisible : </label>
 						<input
 							id="invisible"
 							type="checkbox"
-							bind:value={invisible}
-							on:change={handleInvisibleButtonClick}
+							bind:value="{invisible}"
+							on:change="{handleInvisibleButtonClick}"
 						/>
 					</li>
 					<li class="list-item">
@@ -475,8 +486,8 @@ role="presentation"
 						<input
 							id="nodeConnect"
 							type="checkbox"
-							bind:value={nodeConnect}
-							on:change={handleNodeConnectButtonClick}
+							bind:value="{nodeConnect}"
+							on:change="{handleNodeConnectButtonClick}"
 						/>
 					</li>
 					<li class="list-item">
@@ -484,8 +495,8 @@ role="presentation"
 						<input
 							id="input"
 							type="checkbox"
-							bind:value={input}
-							on:change={handleInputButtonClick}
+							bind:value="{input}"
+							on:change="{handleInputButtonClick}"
 						/>
 					</li>
 					<li class="list-item">
@@ -493,8 +504,8 @@ role="presentation"
 						<input
 							id="output"
 							type="checkbox"
-							bind:value={output}
-							on:change={handleOutputButtonClick}
+							bind:value="{output}"
+							on:change="{handleOutputButtonClick}"
 						/>
 					</li>
 					<li class="list-item">
@@ -502,13 +513,17 @@ role="presentation"
 						<input
 							id="multiple"
 							type="checkbox"
-							bind:value={multiple}
-							on:change={handleMultipleButtonClick}
+							bind:value="{multiple}"
+							on:change="{handleMultipleButtonClick}"
 						/>
 					</li>
 					<li class="list-item">
 						<label for="direction">Direction: </label>
-						<select id="direction" bind:value={direction} on:change={handleDirectionButtonClick}>
+						<select
+							id="direction"
+							bind:value="{direction}"
+							on:change="{handleDirectionButtonClick}"
+						>
 							<option value="">-</option>
 							<option value="north">North</option>
 							<option value="south">South</option>
@@ -522,13 +537,13 @@ role="presentation"
 						<input
 							id="dynamic"
 							type="checkbox"
-							bind:value={dynamic}
-							on:change={handleDynamicButtonClick}
+							bind:value="{dynamic}"
+							on:change="{handleDynamicButtonClick}"
 						/>
 					</li>
 					<li class="list-item">
 						<label for="anchorEdgeLabel">Edge Label : </label>
-						<input id="anchorEdgeLabel" type="text" bind:value={anchorEdgeLabel} />
+						<input id="anchorEdgeLabel" type="text" bind:value="{anchorEdgeLabel}" />
 					</li>
 
 					<li class="list-item">
@@ -536,14 +551,14 @@ role="presentation"
 						<input
 							id="anchorLocked"
 							type="checkbox"
-							bind:value={anchorLocked}
-							on:change={handleAnchorLockedButtonClick}
+							bind:value="{anchorLocked}"
+							on:change="{handleAnchorLockedButtonClick}"
 						/>
 					</li>
 					<li class="list-item">
 						<button
 							class="anchorResetBtn btn"
-							on:click|stopPropagation={handleAnchorResetButtonClick}>Reset</button
+							on:click|stopPropagation="{handleAnchorResetButtonClick}">Reset</button
 						>
 					</li>
 				</ul>
@@ -553,57 +568,62 @@ role="presentation"
 				<ul>
 					<li class="list-item">
 						<label for="targetColor">Target Color : </label>
-						<input id="targetColor" class="colorWheel" type="color" bind:value={targetColor} />
+						<input id="targetColor" class="colorWheel" type="color" bind:value="{targetColor}" />
 					</li>
 					<li class="list-item">
 						<label for="color">Color : </label>
-						<input id="color" class="colorWheel" type="color" bind:value={color} />
+						<input id="color" class="colorWheel" type="color" bind:value="{color}" />
 					</li>
 					<li class="list-item">
 						<label for="labelColor">Label Color : </label>
-						<input id="labelColor" class="colorWheel" type="color" bind:value={labelColor} />
+						<input id="labelColor" class="colorWheel" type="color" bind:value="{labelColor}" />
 					</li>
 					<li class="list-item">
 						<label for="textColor">Text Color : </label>
-						<input id="textColor" class="colorWheel" type="color" bind:value={textColor} />
+						<input id="textColor" class="colorWheel" type="color" bind:value="{textColor}" />
 					</li>
 					<li class="list-item">
 						<label for="width">Width :</label>
-						<input id="width" class="inputField" type="number" bind:value={edgeWidth} />
+						<input id="width" class="inputField" type="number" bind:value="{edgeWidth}" />
 					</li>
 					<li class="list-item">
 						<label for="cornerRadius">Corner Radius :</label>
-						<input id="cornerRadius" class="inputField" type="number" bind:value={cornerRadius} />
+						<input id="cornerRadius" class="inputField" type="number" bind:value="{cornerRadius}" />
 					</li>
 					<li class="list-item">
 						<label for="straight">Straight : </label>
 						<input
 							id="straight"
 							type="checkbox"
-							bind:value={straight}
-							on:change={handleStraightButtonClick}
+							bind:value="{straight}"
+							on:change="{handleStraightButtonClick}"
 						/>
 					</li>
 					<li class="list-item">
 						<label for="step">Step : </label>
-						<input id="step" type="checkbox" bind:value={step} on:change={handleStepButtonClick} />
+						<input
+							id="step"
+							type="checkbox"
+							bind:value="{step}"
+							on:change="{handleStepButtonClick}"
+						/>
 					</li>
 					<li class="list-item">
 						<label for="animate">Animate : </label>
 						<input
 							id="animate"
 							type="checkbox"
-							bind:value={animate}
-							on:change={handleAnimateButtonClick}
+							bind:value="{animate}"
+							on:change="{handleAnimateButtonClick}"
 						/>
 					</li>
 
 					<li class="list-item">
 						<label for="edgeLabel">Edge Label : </label>
-						<input id="edgeLabel" type="text" bind:value={edgeLabel} />
+						<input id="edgeLabel" type="text" bind:value="{edgeLabel}" />
 					</li>
 					<li class="list-item">
-						<button class="edgeResetBtn btn" on:click|stopPropagation={handleEdgeResetButtonClick}
+						<button class="edgeResetBtn btn" on:click|stopPropagation="{handleEdgeResetButtonClick}"
 							>Reset</button
 						>
 					</li>

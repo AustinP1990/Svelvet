@@ -84,12 +84,12 @@
 	class="minimap-wrapper"
 	style:width="{width}px"
 	style:height="{height ? height : width}px"
-	style:--prop-minimap-border-color={borderColor}
-	style:--prop-minimap-background-color={mapColor}
-	class:SW={corner === 'SW'}
-	class:NE={corner === 'NE'}
-	class:SE={corner === 'SE'}
-	class:NW={corner === 'NW'}
+	style:--prop-minimap-border-color="{borderColor}"
+	style:--prop-minimap-background-color="{mapColor}"
+	class:SW="{corner === 'SW'}"
+	class:NE="{corner === 'NE'}"
+	class:SE="{corner === 'SE'}"
+	class:NW="{corner === 'NW'}"
 >
 	<div
 		class="node-wrapper"
@@ -100,23 +100,23 @@
 		{#each Array.from($nodes.entries()) as [id, node] (id)}
 			{#if node.id !== 'N-editor'}
 				<MiniNode
-					{node}
-					{top}
-					{left}
-					{nodeColor}
-					hidden={$hidden.has(node)}
-					{toggleHidden}
-					{hideable}
+					node="{node}"
+					top="{top}"
+					left="{left}"
+					nodeColor="{nodeColor}"
+					hidden="{$hidden.has(node)}"
+					toggleHidden="{toggleHidden}"
+					hideable="{hideable}"
 				/>
 			{/if}
 		{/each}
 
 		{#each Array.from($groupBoxes.entries()) as [id, group] (id)}
-			<MiniGroupBox {...group} {top} {left} groupName={id} />
+			<MiniGroupBox {...group} top="{top}" left="{left}" groupName="{id}" />
 		{/each}
 	</div>
 
-	<div class="overlay" style={windowStyle} />
+	<div class="overlay" style="{windowStyle}"></div>
 </div>
 
 <style>

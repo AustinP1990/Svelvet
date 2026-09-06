@@ -5,7 +5,7 @@
 	import { initialClickPosition, tracking } from '$lib/stores/CursorStore'; //these are like stores that track cursor position and whether an element is being dragged or moved
 	import { captureGroup, moveNodes } from '$lib/utils/movers/';
 	import { getContext } from 'svelte';
-	import type { Graph } from '$lib/types'; //Graph type object
+	import type { Graph, InitialDimensions } from '$lib/types'; //Graph type object
 
 	const graph = getContext<Graph>('graph');
 	const snapTo = getContext<number>('snapTo');
@@ -32,7 +32,7 @@
 
 <!--GroupBoxRenderer-This component renders the graphical representation of the groups in the graph. It listens for a groupClick event and, when triggered, invokes handleGroupClicked to initiate the logic for handling group selection and movement.
 -->
-<ZoomPanWrapper {isMovable}>
+<ZoomPanWrapper isMovable="{isMovable}">
 	<slot />
-	<GroupBoxRenderer on:groupClick={handleGroupClicked} />
+	<GroupBoxRenderer on:groupClick="{handleGroupClicked}" />
 </ZoomPanWrapper>

@@ -9,7 +9,7 @@
 	on:keydown|stopPropagation
 	on:click|stopPropagation
 	on:mousedown|stopPropagation
-	{placeholder}
+	placeholder="{placeholder}"
 	type="text"
-	bind:value={$textStore}
+	bind:value="{$textStore}"
 />

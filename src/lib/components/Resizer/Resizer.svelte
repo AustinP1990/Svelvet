@@ -2,12 +2,13 @@
 	import { calculateFitContentWidth } from '$lib/utils';
 	import { beforeUpdate, getContext, onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import { initialClickPosition, resizing } from '$lib/stores';
+	import { resizing } from '$lib/stores';
 	import type { Graph, Node } from '$lib/types';
 	import type { Writable } from 'svelte/store';
 </script>
 
 <script lang="ts">
+	import { initialClickPosition } from '$lib/stores';
 	const graph = getContext<Graph>('graph');
 	const node = getContext<Node>('node');
 	const resized = getContext<Writable<boolean>>('resized');
@@ -234,19 +235,19 @@
 </script>
 
 {#if width}
-	<div use:resizeHandler={{ left }} class:width class="left" />
-	<div use:resizeHandler={{ right }} class:width class="right" />
+	<div use:resizeHandler="{{ left }}" class:width="{width}" class="left"></div>
+	<div use:resizeHandler="{{ right }}" class:width="{width}" class="right"></div>
 {/if}
 
 {#if height}
-	<div use:resizeHandler={{ top }} class:height class="top" />
-	<div use:resizeHandler={{ bottom }} class:height class="bottom" />
+	<div use:resizeHandler="{{ top }}" class:height="{height}" class="top"></div>
+	<div use:resizeHandler="{{ bottom }}" class:height="{height}" class="bottom"></div>
 {/if}
 {#if both}
-	<div use:resizeHandler={{ both }} class:both />
+	<div use:resizeHandler="{{ both }}" class:both="{both}"></div>
 {/if}
 {#if rotation}
-	<div use:rotateHandler class:rotation />
+	<div use:rotateHandler class:rotation="{rotation}"></div>
 {/if}
 
 <style>

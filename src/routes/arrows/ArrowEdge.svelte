@@ -6,9 +6,9 @@
 	let:path
 	end="arrow"
 	color="green"
-	step={true}
-	width={2}
-	animate={true}
+	step="{true}"
+	width="{2}"
+	animate="{true}"
 	label="New Arrows!"
 	labelColor="green"
 	textColor="white"

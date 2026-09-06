@@ -1,4 +1,3 @@
-import { page } from '$app/stores';
 import { expect, test } from '@playwright/test';
 
 const testRoute = '/color-test';

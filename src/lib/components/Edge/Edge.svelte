@@ -305,11 +305,11 @@
 </script>
 
 {#if source && target}
-	<svg class="edges-wrapper" style:z-index={zIndex} bind:this={edgeElement}>
+	<svg class="edges-wrapper" style:z-index="{zIndex}" bind:this="{edgeElement}">
 		{#if start || end}
 			<defs>
 				<marker
-					id={edgeKey + '-end-arrow'}
+					id="{edgeKey + '-end-arrow'}"
 					viewBox="0 0 15 15"
 					markerWidth="15"
 					markerHeight="10"
@@ -317,10 +317,11 @@
 					refY="5"
 					orient="auto"
 				>
-					<polygon class="arrow" points="0 0, 15 5, 0 10" style:--prop-edge-color={finalColor} />
+					<polygon class="arrow" points="0 0, 15 5, 0 10" style:--prop-edge-color="{finalColor}"
+					></polygon>
 				</marker>
 				<marker
-					id={edgeKey + '-start-arrow'}
+					id="{edgeKey + '-start-arrow'}"
 					viewBox="0 0 15 15"
 					markerWidth="15"
 					markerHeight="10"
@@ -328,44 +329,43 @@
 					refY="5"
 					orient="auto"
 				>
-					<polygon class="arrow" points="0 5, 15 0, 15 10" style:--prop-edge-color={finalColor} />
+					<polygon class="arrow" points="0 5, 15 0, 15 10" style:--prop-edge-color="{finalColor}"
+					></polygon>
 				</marker>
 			</defs>
 		{/if}
 		<path
 			role="presentation"
-			id={edgeKey + '-target'}
+			id="{edgeKey + '-target'}"
 			class="target"
-			class:cursor={edgeKey === 'cursor' || (!edgeClick && !enableHover)}
-			style:cursor={edgeClick || hovering ? 'pointer' : 'move'}
-			style:--prop-target-edge-color={edgeClick || hovering ? targetColor || null : 'transparent'}
-			d={path}
-			on:mousedown={edgeClick}
-			on:mouseenter={() => (hovering = true)}
-			on:mouseleave={() => (hovering = false)}
-			bind:this={DOMPath}
-		/>
-		<slot {path} {destroy} {hovering}>
+			class:cursor="{edgeKey === 'cursor' || (!edgeClick && !enableHover)}"
+			style:cursor="{edgeClick || hovering ? 'pointer' : 'move'}"
+			style:--prop-target-edge-color="{edgeClick || hovering ? targetColor || null : 'transparent'}"
+			d="{path}"
+			on:mousedown="{edgeClick}"
+			on:mouseenter="{() => (hovering = true)}"
+			on:mouseleave="{() => (hovering = false)}"
+			bind:this="{DOMPath}"></path>
+		<slot path="{path}" destroy="{destroy}" hovering="{hovering}">
 			<path
-				id={edgeKey}
+				id="{edgeKey}"
 				class="edge"
-				class:animate
-				d={path}
-				style:--prop-edge-color={finalColor}
-				marker-end={end === 'arrow' ? `url(#${edgeKey + '-end-arrow'})` : ''}
-				marker-start={start === 'arrow' ? `url(#${edgeKey + '-start-arrow'})` : ''}
-				style:--prop-stroke-width={width ? width + 'px' : null}
-			/>
+				class:animate="{animate}"
+				d="{path}"
+				style:--prop-edge-color="{finalColor}"
+				marker-end="{end === 'arrow' ? `url(#${edgeKey + '-end-arrow'})` : ''}"
+				marker-start="{start === 'arrow' ? `url(#${edgeKey + '-start-arrow'})` : ''}"
+				style:--prop-stroke-width="{width ? width + 'px' : null}"></path>
 		</slot>
 
 		{#if renderLabel}
-			<foreignObject x={labelPoint.x} y={labelPoint.y} width="100%" height="100%">
+			<foreignObject x="{labelPoint.x}" y="{labelPoint.y}" width="100%" height="100%">
 				<span class="label-wrapper">
-					<slot name="label" {destroy} {hovering}>
+					<slot name="label" destroy="{destroy}" hovering="{hovering}">
 						<div
 							class="default-label"
-							style:--prop-label-color={labelColor}
-							style:--prop-label-text-color={textColor}
+							style:--prop-label-color="{labelColor}"
+							style:--prop-label-text-color="{textColor}"
 						>
 							{labelText}
 						</div>

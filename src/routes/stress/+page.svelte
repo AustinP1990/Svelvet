@@ -2,20 +2,18 @@
 	import { Svelvet, Node } from '$lib';
 </script>
 
-<body>
-	<div class="wrapper">
-		<Svelvet fitView width={800} height={500} theme="dark" minimap controls>
-			{#each { length: 400 } as _, i}
-				<Node
-					position={{ x: Math.random() * 4000, y: Math.random() * 4000 }}
-					connections={[Math.floor(Math.random() * 200)]}
-					inputs={1}
-					outputs={1}
-				/>
-			{/each}
-		</Svelvet>
-	</div>
-</body>
+<div class="wrapper">
+	<Svelvet fitView width="{800}" height="{500}" theme="dark" minimap controls>
+		{#each { length: 400 } as _, i}
+			<Node
+				position="{{ x: Math.random() * 4000, y: Math.random() * 4000 }}"
+				connections="{[Math.floor(Math.random() * 200)]}"
+				inputs="{1}"
+				outputs="{1}"
+			/>
+		{/each}
+	</Svelvet>
+</div>
 
 <style>
 	.wrapper {
@@ -25,7 +23,7 @@
 		overflow: hidden;
 		box-shadow: 0 0 40px 0 rgba(37, 37, 37, 0.5);
 	}
-	body {
+	:global(body) {
 		display: flex;
 		justify-content: center;
 		align-items: center;

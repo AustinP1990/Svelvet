@@ -27,15 +27,21 @@
 	}
 </script>
 
-<div class="radio-group" role="radiogroup" on:keydown={cycleThroughGroup} tabindex={0}>
+<div class="radio-group" role="radiogroup" on:keydown="{cycleThroughGroup}" tabindex="{0}">
 	{#each options as label, index}
 		<button
-			on:mousedown|stopPropagation={() => {
+			on:mousedown|stopPropagation="{() => {
 				initial = index;
-			}}
+			}}"
 		>
 			<label class="option-wrapper">
-				<input class="option" type="radio" id={slugify(label)} bind:group={initial} value={index} />
+				<input
+					class="option"
+					type="radio"
+					id="{slugify(label)}"
+					bind:group="{initial}"
+					value="{index}"
+				/>
 				<p>{label}</p>
 			</label>
 		</button>

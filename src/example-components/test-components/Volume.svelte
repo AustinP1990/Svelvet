@@ -16,17 +16,17 @@
 	const output = generateOutput(inputs, procesor);
 </script>
 
-<Node useDefaults position={{ x: 110, y: 550 }} let:selected>
-	<NodeWrapper title="Volume" outputStore={output} key="volume">
+<Node useDefaults position="{{ x: 110, y: 550 }}" let:selected>
+	<NodeWrapper title="Volume" outputStore="{output}" key="volume">
 		<div class="node-body">
 			<Knob
-				fixed={0}
-				min={0}
-				max={100}
-				step={1}
-				minDegree={30}
-				maxDegree={330}
-				parameterStore={$inputs.data}
+				fixed="{0}"
+				min="{0}"
+				max="{100}"
+				step="{1}"
+				minDegree="{30}"
+				maxDegree="{330}"
+				parameterStore="{$inputs.data}"
 			/>
 		</div>
 	</NodeWrapper>

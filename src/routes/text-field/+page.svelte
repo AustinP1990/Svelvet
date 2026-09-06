@@ -8,11 +8,11 @@
 	setContext('textStore', textStore); // Setting up the context
 </script>
 
-<Svelvet width={1000} height={1000}>
-	<Node width={400} height={200} useDefaults>
-		<TextField placeholder={'test placeholder'} />
+<Svelvet width="{1000}" height="{1000}">
+	<Node width="{400}" height="{200}" useDefaults>
+		<TextField placeholder="{'test placeholder'}" />
 	</Node>
-	<Node width={400} height={200} position={{ x: 0, y: 300 }} useDefaults>
+	<Node width="{400}" height="{200}" position="{{ x: 0, y: 300 }}" useDefaults>
 		{$textStore}
 	</Node>
 </Svelvet>

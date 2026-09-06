@@ -63,31 +63,37 @@
 	class:NW={corner === 'NW'}
 	aria-label="navigation"
 > -->
-	<slot {zoomIn} {zoomOut} {fitView} {lock} {unhideAll}>
+	<slot
+		zoomIn="{zoomIn}"
+		zoomOut="{zoomOut}"
+		fitView="{fitView}"
+		lock="{lock}"
+		unhideAll="{unhideAll}"
+	>
 		<div
 			class="controls-wrapper"
-			class:horizontal
-			style:--prop-controls-background-color={bgColor}
-			style:--prop-controls-text-color={iconColor}
+			class:horizontal="{horizontal}"
+			style:--prop-controls-background-color="{bgColor}"
+			style:--prop-controls-text-color="{iconColor}"
 		>
 			{#if get(hidden).size > 0}
 				<!-- {#if $hidden.size > 0} -->
-				<button class="unhide" on:mousedown|stopPropagation={unhideAll}>
+				<button class="unhide" on:mousedown|stopPropagation="{unhideAll}">
 					<Icon icon="visibility_off" />
 				</button>
 			{/if}
-			<button class="zoom-in" on:pointerdown|stopPropagation={zoomIn}>
+			<button class="zoom-in" on:pointerdown|stopPropagation="{zoomIn}">
 				<!-- <button class="zoom-in" on:mousedown|stopPropagation={zoomIn} on:touchstart={zoomIn}> -->
 				<Icon icon="zoom_in" />
 			</button>
-			<button class="zoom-out" on:mousedown|stopPropagation={zoomOut} on:touchstart={zoomOut}>
+			<button class="zoom-out" on:mousedown|stopPropagation="{zoomOut}" on:touchstart="{zoomOut}">
 				<Icon icon="zoom_out" />
 			</button>
-			<button class="reset" on:mousedown|stopPropagation={fitView} on:touchstart={fitView}>
+			<button class="reset" on:mousedown|stopPropagation="{fitView}" on:touchstart="{fitView}">
 				<Icon icon="filter_center_focus" />
 			</button>
-			<button class="lock" on:mousedown|stopPropagation={lock} on:touchstart={lock}>
-				<Icon icon={$locked ? 'lock' : 'lock_open'} />
+			<button class="lock" on:mousedown|stopPropagation="{lock}" on:touchstart="{lock}">
+				<Icon icon="{$locked ? 'lock' : 'lock_open'}" />
 			</button>
 		</div>
 	</slot>

@@ -81,44 +81,44 @@
 
 <div id="edgeContainer">
 	<!-- On submit resets all the values on the input field in the form to default -->
-	<form on:submit|preventDefault={handleEdgeResetButtonClick}>
+	<form on:submit|preventDefault="{handleEdgeResetButtonClick}">
 		<ul aria-labelledby="select_props">
 			<li class="list-item">
 				<label for="color">Background: </label>
-				<input id="color" class="colorWheel" type="color" bind:value={color} />
+				<input id="color" class="colorWheel" type="color" bind:value="{color}" />
 			</li>
 			<li class="list-item">
 				<label for="labelColor">Label: </label>
-				<input id="labelColor" class="colorWheel" type="color" bind:value={labelColor} />
+				<input id="labelColor" class="colorWheel" type="color" bind:value="{labelColor}" />
 			</li>
 			<li class="list-item">
 				<label for="textColor">Text: </label>
-				<input id="textColor" class="colorWheel" type="color" bind:value={textColor} />
+				<input id="textColor" class="colorWheel" type="color" bind:value="{textColor}" />
 			</li>
 			<li class="list-item">
 				<label for="animate">Animate : </label>
 				<input
 					id="animate"
 					type="checkbox"
-					bind:value={animate}
-					on:change={handleAnimateButtonClick}
+					bind:value="{animate}"
+					on:change="{handleAnimateButtonClick}"
 				/>
 			</li>
 			<li class="list-item">
 				<label for="step">Step: </label>
-				<input id="step" type="checkbox" bind:value={step} on:change={handleStepButtonClick} />
+				<input id="step" type="checkbox" bind:value="{step}" on:change="{handleStepButtonClick}" />
 			</li>
 			<li class="list-item">
 				<label for="cornerRadius">Corner Radius:</label>
-				<input id="cornerRadius" class="inputField" type="number" bind:value={cornerRadius} />
+				<input id="cornerRadius" class="inputField" type="number" bind:value="{cornerRadius}" />
 			</li>
 			<li class="list-item">
 				<label for="width">Width:</label>
-				<input id="width" class="inputField" type="number" bind:value={edgeWidth} />
+				<input id="width" class="inputField" type="number" bind:value="{edgeWidth}" />
 			</li>
 			<li class="list-item">
 				<label for="edgeLabel">Edge Label: </label>
-				<input id="edgeLabel" type="text" bind:value={edgeLabel} />
+				<input id="edgeLabel" type="text" bind:value="{edgeLabel}" />
 			</li>
 			<li class="list-item">
 				<button class="edgeResetBtn btn" aria-label="Reset">Reset</button>

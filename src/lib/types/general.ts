@@ -1,4 +1,7 @@
 import type { Writable } from 'svelte/store';
+import type { Component } from 'svelte';
+
+export type ComponentLike = Component<any> | (new (...args: any[]) => any);
 
 export interface XYPosition {
 	x: Writable<number>;

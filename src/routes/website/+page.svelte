@@ -14,11 +14,19 @@
 </script>
 
 <div class="diagram">
-	<Svelvet edgeStyle="step" TD {theme} {zoom} controls minimap={minimapVisible} fitView="resize">
+	<Svelvet
+		edgeStyle="step"
+		TD
+		theme="{theme}"
+		zoom="{zoom}"
+		controls
+		minimap="{minimapVisible}"
+		fitView="resize"
+	>
 		<Group
-			position={{ x: -150, y: -100 }}
-			width={600}
-			height={700}
+			position="{{ x: -150, y: -100 }}"
+			width="{600}"
+			height="{700}"
 			color="goldenrod"
 			groupName="parameters"
 		>

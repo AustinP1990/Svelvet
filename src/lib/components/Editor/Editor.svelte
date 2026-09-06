@@ -1,9 +1,8 @@
 <script lang="ts">
-	import Slider from '../data/Slider/Slider.svelte';
+	// import Slider from '../data/Slider/Slider.svelte';
 	import TextField from '../data/TextField/TextField.svelte';
 	import type { Graph } from '$lib/types';
-	import { writable, type Writable } from 'svelte/store';
-	import { Resizer } from '$lib';
+	import type { Writable } from 'svelte/store';
 	import { getContext, setContext } from 'svelte';
 
 	import type { CSSColorString, Node as SvelvetNode } from '$lib/types';
@@ -68,18 +67,17 @@
 	}
 </script>
 
-<Node zIndex={Infinity} position={editorPosition} bgColor="white" id="editor">
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-
-	<div on:contextmenu={handleContextMenu} class="editor">
+<Node zIndex="{Infinity}" position="{editorPosition}" bgColor="white" id="editor">
+	<div on:contextmenu="{handleContextMenu}" class="editor" role="application">
 		<span style="color:white; font-size:45px">Editor</span>
-		<button on:click={() => graph.editing.set(null)} style="position:absolute; top:10px;right:10px;"
-			>X</button
+		<button
+			on:click="{() => graph.editing.set(null)}"
+			style="position:absolute; top:10px;right:10px;">X</button
 		>
 		<!-- <Slider parameterStore={editing.dimensions.width} max={1000} label="" /> -->
-		<TextField placeholder={'Node Label'} />
-		<button on:click={deleteNode}>Delete Node</button>
-		<button on:click={resizeNode}>Resize Node</button>
+		<TextField placeholder="{'Node Label'}" />
+		<button on:click="{deleteNode}">Delete Node</button>
+		<button on:click="{resizeNode}">Resize Node</button>
 	</div>
 </Node>
 

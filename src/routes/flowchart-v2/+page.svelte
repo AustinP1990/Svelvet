@@ -8,9 +8,14 @@
     D --> F[Unparalleled customization]`;
 </script>
 
-<body>
-	<Svelvet theme="dark" width={800} height={800} title="flowchart" controls mermaid={mermaidStr} />
-</body>
+<Svelvet
+	theme="dark"
+	width="{800}"
+	height="{800}"
+	title="flowchart"
+	controls
+	mermaid="{mermaidStr}"
+/>
 
 <style>
 	@import url(https://fonts.googleapis.com/css?family=Rubik);

@@ -10,37 +10,35 @@
 	}
 </script>
 
-<body>
-	<div class="wrapper">
-		<Svelvet
-			on:connection={handleConnection}
-			theme="dark"
-			width={800}
-			height={500}
-			controls
-			title="tests"
-		>
-			<Node
-				id="node1"
-				{label}
-				resizable
-				on:nodeClicked={(e) => (label = e.detail.node.id)}
-				on:nodeReleased={(e) => (label = 'release')}
-			/>
-			<Node
-				on:connection={() => console.log('node2 connected')}
-				on:disconnection={() => console.log('node2 disconnected')}
-				dimensions={{ width: 400, height: 100 }}
-				bind:position
-				id="node2"
-				label="test"
-				edge={CustomEdge}
-			/>
-			<Node label="what" position={{ x: 10, y: 200 }} inputs={3} TD />
-			<Minimap slot="minimap" />
-		</Svelvet>
-	</div>
-</body>
+<div class="wrapper">
+	<Svelvet
+		on:connection="{handleConnection}"
+		theme="dark"
+		width="{800}"
+		height="{500}"
+		controls
+		title="tests"
+	>
+		<Node
+			id="node1"
+			label="{label}"
+			resizable
+			on:nodeClicked="{(e) => (label = e.detail.node.id)}"
+			on:nodeReleased="{(e) => (label = 'release')}"
+		/>
+		<Node
+			on:connection="{() => console.log('node2 connected')}"
+			on:disconnection="{() => console.log('node2 disconnected')}"
+			dimensions="{{ width: 400, height: 100 }}"
+			bind:position="{position}"
+			id="node2"
+			label="test"
+			edge="{CustomEdge}"
+		/>
+		<Node label="what" position="{{ x: 10, y: 200 }}" inputs="{3}" TD />
+		<Minimap slot="minimap" />
+	</Svelvet>
+</div>
 
 <style>
 	.wrapper {
@@ -50,7 +48,7 @@
 		overflow: hidden;
 		box-shadow: 0 0 40px 0 rgba(37, 37, 37, 0.5);
 	}
-	body {
+	:global(body) {
 		display: flex;
 		justify-content: center;
 		align-items: center;

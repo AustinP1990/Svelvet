@@ -18,7 +18,9 @@ export interface NodeDrawerConfig {
 	nodeDirection?: string;
 	anchors?: { [key: string]: AnchorDrawerConfig[] };
 	edgeProps?: EdgeDrawerConfig;
-	id: string;
+	id?: string;
+	x?: number;
+	y?: number;
 }
 
 export type NodeProps = [
@@ -37,5 +39,3 @@ export type NodeProps = [
 	LR: boolean | undefined,
 	useDefaults: boolean | undefined
 ];
-
-

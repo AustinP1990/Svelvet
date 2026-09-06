@@ -4,41 +4,39 @@
 	let outputs = 4;
 </script>
 
-<body>
-	<div class="wrapper">
-		<Svelvet width={600} height={900} controls>
-			<Node
-				position={{ x: 200, y: 800 }}
-				{outputs}
-				id="dynamic"
-				label="Dynamic 1"
-				resizable
-				dynamic
-				connections={[2, 2]}
-			/>
-			<Node connections={[1]} position={{ x: 500, y: 400 }} label="Static" />
-			<Node useDefaults width={200} height={100} connections={[1, 4]}>
-				<Anchor dynamic />
-				<h1>Half</h1>
-				<div class="anchor">
-					<Anchor direction="west" connections={[2]} />
-				</div>
-			</Node>
-			<Node
-				label="Dynamic"
-				connections={[1, 2]}
-				position={{ x: 10, y: 200 }}
-				inputs={3}
-				dynamic
-				TD
-			/>
-			<Node bgColor="transparent" connections={[6]} dynamic />
-			<Node bgColor="transparent" />
-			<Node bgColor="transparent" connections={[[8, 2]]} TD />
-			<Node bgColor="transparent" LR />
-		</Svelvet>
-	</div>
-</body>
+<div class="wrapper">
+	<Svelvet width="{600}" height="{900}" controls>
+		<Node
+			position="{{ x: 200, y: 800 }}"
+			outputs="{outputs}"
+			id="dynamic"
+			label="Dynamic 1"
+			resizable
+			dynamic
+			connections="{[2, 2]}"
+		/>
+		<Node connections="{[1]}" position="{{ x: 500, y: 400 }}" label="Static" />
+		<Node useDefaults width="{200}" height="{100}" connections="{[1, 4]}">
+			<Anchor dynamic />
+			<h1>Half</h1>
+			<div class="anchor">
+				<Anchor direction="west" connections="{[2]}" />
+			</div>
+		</Node>
+		<Node
+			label="Dynamic"
+			connections="{[1, 2]}"
+			position="{{ x: 10, y: 200 }}"
+			inputs="{3}"
+			dynamic
+			TD
+		/>
+		<Node bgColor="transparent" connections="{[6]}" dynamic />
+		<Node bgColor="transparent" />
+		<Node bgColor="transparent" connections="{[[8, 2]]}" TD />
+		<Node bgColor="transparent" LR />
+	</Svelvet>
+</div>
 
 <style>
 	.wrapper {
@@ -48,7 +46,7 @@
 		overflow: hidden;
 		box-shadow: 0 0 40px 0 rgba(37, 37, 37, 0.5);
 	}
-	body {
+	:global(body) {
 		display: flex;
 		justify-content: center;
 		align-items: center;

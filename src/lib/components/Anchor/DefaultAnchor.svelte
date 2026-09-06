@@ -15,13 +15,13 @@ style:--prop-anchor-color={bgColor}
 />// -->
 <div
 	class="svelvet-anchor"
-	class:output
-	class:input
-	class:connected
-	class:connecting
-	class:hovering
-	style:--prop-anchor-color={bgColor}
-/>
+	class:output="{output}"
+	class:input="{input}"
+	class:connected="{connected}"
+	class:connecting="{connecting}"
+	class:hovering="{hovering}"
+	style:--prop-anchor-color="{bgColor}"
+></div>
 
 <style>
 	* {

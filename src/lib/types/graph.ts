@@ -15,7 +15,7 @@ import type {
 	GraphDimensions,
 	Theme
 } from '.';
-import type { ComponentType } from 'svelte';
+import type { ComponentLike } from './general';
 import type { createBoundsStore } from '$lib/utils/creators/createBoundsStore';
 
 export interface Graph {
@@ -33,7 +33,7 @@ export interface Graph {
 	cursor: Readable<{ x: number; y: number }>;
 	groups: Writable<Groups>;
 	edges: EdgeStore;
-	edge: ComponentType | null;
+	edge: ComponentLike | null;
 	groupBoxes: GroupBoxStore;
 	editing: Writable<Node | null>;
 	activeGroup: Writable<GroupKey | null>;
@@ -48,7 +48,7 @@ export interface GraphConfig {
 	locked?: boolean;
 	theme?: Theme;
 	translation?: { x: number; y: number };
-	edge?: ComponentType;
+	edge?: ComponentLike;
 }
 
 export type LinkingAny = Anchor;

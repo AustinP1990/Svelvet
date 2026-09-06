@@ -96,22 +96,25 @@
 
 <div
 	class="controls-wrapper"
-	style:--prop-theme-toggle-color={bgColor}
-	style:--prop-theme-toggle-text-color={iconColor}
-	class:SW={corner === 'SW'}
-	class:NE={corner === 'NE'}
-	class:SE={corner === 'SE'}
-	class:NW={corner === 'NW'}
+	style:--prop-theme-toggle-color="{bgColor}"
+	style:--prop-theme-toggle-text-color="{iconColor}"
+	class:SW="{corner === 'SW'}"
+	class:NE="{corner === 'NE'}"
+	class:SE="{corner === 'SE'}"
+	class:NW="{corner === 'NW'}"
 >
-	<button on:mousedown|stopPropagation={toggleTheme} on:touchstart|stopPropagation={toggleTheme}>
+	<button
+		on:mousedown|stopPropagation="{toggleTheme}"
+		on:touchstart|stopPropagation="{toggleTheme}"
+	>
 		<span class="material-symbols-outlined">{current === main ? altIcon : mainIcon}</span>
 	</button>
 
 	<button
 		class="save-button NW"
-		on:click={() => {
+		on:click="{() => {
 			getJSONState(graph);
-		}}>Save</button
+		}}">Save</button
 	>
 </div>
 

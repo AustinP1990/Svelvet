@@ -15,14 +15,14 @@
 
 <div
 	class="mini-bounding-box"
-	id={`mini-${groupName}-bounding-box`}
-	style:top={`${$position.y - top}px`}
-	style:left={`${$position.x - left}px`}
-	style:width={`${$width}px`}
-	style:height={`${$height}px`}
+	id="{`mini-${groupName}-bounding-box`}"
+	style:top="{`${$position.y - top}px`}"
+	style:left="{`${$position.x - left}px`}"
+	style:width="{`${$width}px`}"
+	style:height="{`${$height}px`}"
 	style="border: solid 4px {$color};"
-	style:background-color={$color}
-/>
+	style:background-color="{$color}"
+></div>
 
 <style>
 	.mini-bounding-box {

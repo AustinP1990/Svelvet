@@ -1,7 +1,7 @@
 import type { Writable, Readable } from 'svelte/store';
 import type { AnchorKey, CSSColorString, CustomWritable, Node, XYPair } from '$lib/types';
 import type { generateOutput } from '$lib/utils';
-import type { ComponentType } from 'svelte';
+import type { ComponentLike } from './general';
 
 export interface Anchor {
 	id: AnchorKey;
@@ -16,7 +16,7 @@ export interface Anchor {
 	connected: Writable<Set<Anchor>>;
 	dynamic: Writable<boolean>;
 	// Custom edge component if provided
-	edge: ComponentType | null;
+	edge: ComponentLike | null;
 	// "Direction" of the anchor. Controls the curvature of the edge
 	direction: Writable<Direction>;
 	rotation: Readable<number>;

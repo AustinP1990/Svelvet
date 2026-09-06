@@ -4,7 +4,7 @@
 	import { get } from 'svelte/store';
 	import { createNode } from '$lib/utils';
 	import { getContext, onDestroy, onMount, setContext } from 'svelte';
-	import type { ComponentType } from 'svelte';
+	import type { ComponentLike } from '$lib/types';
 	import type { NodeKey, Anchor, AnchorKey } from '$lib/types';
 	import type { Graph, Node as NodeType, NodeConfig, GroupKey } from '$lib/types';
 	import type { Connections, CSSColorString, InitialDimensions } from '$lib/types';
@@ -63,7 +63,7 @@
 	export let editable = true;
 	export let locked = false;
 	export let rotation = 0;
-	export let edge: ComponentType | null = null;
+	export let edge: ComponentLike | null = null;
 	/**
 	 * @default []
 	 * @type Array<string | number | [string | number, string | number]>
@@ -265,21 +265,21 @@
 
 {#if node && $nodes.get(node.id)}
 	<InternalNode
-		{node}
-		center={center || drop === 'center'}
-		{isDefault}
-		{useDefaults}
-		dimensionsProvided={!!dimensions || !!width || !!height || isDefault || false}
-		nodeStore={graph.nodes}
-		locked={graph.locked}
-		groups={graph.groups}
-		{title}
-		maxZIndex={graph.maxZIndex}
-		centerPoint={graph.center}
-		cursor={graph.cursor}
-		activeGroup={graph.activeGroup}
-		editing={graph.editing}
-		initialNodePositions={graph.initialNodePositions}
+		node="{node}"
+		center="{center || drop === 'center'}"
+		isDefault="{isDefault}"
+		useDefaults="{useDefaults}"
+		dimensionsProvided="{!!dimensions || !!width || !!height || isDefault || false}"
+		nodeStore="{graph.nodes}"
+		locked="{graph.locked}"
+		groups="{graph.groups}"
+		title="{title}"
+		maxZIndex="{graph.maxZIndex}"
+		centerPoint="{graph.center}"
+		cursor="{graph.cursor}"
+		activeGroup="{graph.activeGroup}"
+		editing="{graph.editing}"
+		initialNodePositions="{graph.initialNodePositions}"
 		on:nodeClicked
 		on:nodeMount
 		on:nodeReleased
@@ -288,9 +288,16 @@
 		let:selected
 		let:grabHandle
 	>
-		<slot {selected} {grabHandle} {disconnect} {connect} {node} {destroy}>
+		<slot
+			selected="{selected}"
+			grabHandle="{grabHandle}"
+			disconnect="{disconnect}"
+			connect="{connect}"
+			node="{node}"
+			destroy="{destroy}"
+		>
 			{#if isDefault}
-				<DefaultNode {selected} on:connection on:disconnection />
+				<DefaultNode selected="{selected}" on:connection on:disconnection />
 			{/if}
 		</slot>
 

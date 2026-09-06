@@ -71,14 +71,14 @@
 
 <div
 	class="selection-border"
-	style:--prop-selection-box-color={color}
-	style:height={CSSheight}
-	style:width={CSSwidth}
-	style:top={CSStop}
-	style:left={CSSleft}
-	class:creating
+	style:--prop-selection-box-color="{color}"
+	style:height="{CSSheight}"
+	style:width="{CSSwidth}"
+	style:top="{CSStop}"
+	style:left="{CSSleft}"
+	class:creating="{creating}"
 >
-	<div class:creating bind:this={box} class="selection-box" />
+	<div class:creating="{creating}" bind:this="{box}" class="selection-box"></div>
 </div>
 
 <style>

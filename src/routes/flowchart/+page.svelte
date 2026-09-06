@@ -7,13 +7,11 @@
       C(Test Node 1) --> E(Test Node 3)`;
 </script>
 
-<body>
-	<Svelvet
-		theme="dark"
-		width={800}
-		height={800}
-		title="flowchart-tests"
-		controls
-		mermaid={mermaidStr}
-	/>
-</body>
+<Svelvet
+	theme="dark"
+	width="{800}"
+	height="{800}"
+	title="flowchart-tests"
+	controls
+	mermaid="{mermaidStr}"
+/>

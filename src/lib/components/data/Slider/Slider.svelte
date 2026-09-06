@@ -145,27 +145,27 @@
 </script>
 
 {#if !connected}
-	<div class="wrapper" style:color={fontColor}>
+	<div class="wrapper" style:color="{fontColor}">
 		<button
 			class="button"
-			on:touchstart|stopPropagation={() => updateValue(-1)}
-			on:mousedown|stopPropagation={() => updateValue(-1)}>−</button
+			on:touchstart|stopPropagation="{() => updateValue(-1)}"
+			on:mousedown|stopPropagation="{() => updateValue(-1)}">−</button
 		>
-		<div class="slider" bind:offsetWidth={sliderWidth}>
+		<div class="slider" bind:offsetWidth="{sliderWidth}">
 			<label for="slider-input" class="input-label">{label}</label>
 			<input
-				tabindex={0}
+				tabindex="{0}"
 				id="slider-input"
 				class="slider-input"
-				style:background={sliderStyle}
-				style:--percentage={CSSpercentage}
+				style:background="{sliderStyle}"
+				style:--percentage="{CSSpercentage}"
 				type="text"
-				value={$parameterStore.toFixed(fixed)}
-				aria-label={label}
-				on:wheel|stopPropagation|preventDefault={(event) => {
+				value="{$parameterStore.toFixed(fixed)}"
+				aria-label="{label}"
+				on:wheel|stopPropagation|preventDefault="{(event) => {
 					updateValue(Math.sign(event.deltaY), step);
-				}}
-				on:keydown|stopPropagation={(e) => {
+				}}"
+				on:keydown|stopPropagation="{(e) => {
 					const { key } = e;
 
 					if (isArrow(key)) {
@@ -174,20 +174,20 @@
 					}
 
 					if (key === 'Enter') validateInput();
-				}}
+				}}"
 				use:slideable
-				bind:this={sliderElement}
+				bind:this="{sliderElement}"
 			/>
 		</div>
 		<button
 			class="button"
-			on:touchstart|stopPropagation={() => updateValue(1)}
-			on:mousedown|stopPropagation={() => updateValue(1)}>+</button
+			on:touchstart|stopPropagation="{() => updateValue(1)}"
+			on:mousedown|stopPropagation="{() => updateValue(1)}">+</button
 		>
 	</div>
 {:else}
 	<div class="wrapper connected">
-		<div class="slider-input connected" style:--percentage="100%" aria-label={label}>
+		<div class="slider-input connected" style:--percentage="100%" aria-label="{label}">
 			<p>{label}</p>
 			<p>{$parameterStore}</p>
 		</div>

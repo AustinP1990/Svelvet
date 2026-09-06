@@ -1,7 +1,7 @@
 <!-- <script lang="ts">
 	import { Node, Svelvet, Anchor, Edge } from '$lib';
 	import type { SvelvetConfig, NodeConfig, XYPair, EdgeStyle, NodeDrawerConfig } from '$lib/types';
-	import type { ComponentType } from 'svelte';
+	import type { ComponentLike } from '$lib/types';
 	import { defaultNodePropsStore } from './DrawerNode.svelte';
 	import { getSnappedPosition } from '$lib/utils/snapGrid';
 
@@ -11,7 +11,7 @@
 	export let minimap = false;
 	export let translation: XYPair = { x: 0, y: 0 };
 	export let controls = false;
-	export let edge: ComponentType | null = null;
+	export let edge: ComponentLike | null = null;
 	export let edgeStyle: EdgeStyle = 'bezier';
 	export let snapTo = 0;
 	export let editable = false;
@@ -206,8 +206,9 @@ const svelvetProps: SvelvetConfig = {
 
 <script lang="ts">
 	import { Node, Svelvet, Anchor, Edge } from '$lib';
+	import { get } from 'svelte/store';
 	import type { SvelvetConfig, NodeConfig, XYPair, EdgeStyle, NodeDrawerConfig } from '$lib/types';
-	import type { ComponentType } from 'svelte';
+	import type { ComponentLike } from '$lib/types';
 	import { defaultNodePropsStore } from './DrawerNode.svelte';
 
 	//Test de componente usando onMount
@@ -223,7 +224,8 @@ const svelvetProps: SvelvetConfig = {
 	export let minimap = false;
 	export let translation: XYPair = { x: 0, y: 0 };
 	export let controls = false;
-	export let edge: ComponentType | null = null;
+    export let keyControls = true;
+	export let edge: ComponentLike | null = null;
 	export let edgeStyle: EdgeStyle = 'bezier';
 	export let snapTo = 0;
 	export let editable = false;
@@ -247,6 +249,7 @@ const svelvetProps: SvelvetConfig = {
 		minimap,
 		translation,
 		controls,
+        keyControls,
 		edge,
 		edgeStyle,
 		snapTo,
@@ -266,10 +269,10 @@ const svelvetProps: SvelvetConfig = {
 	};
 
 	// Suscripción reactiva al store
-	let defaultNodes = $defaultNodePropsStore;
+	let defaultNodes = get(defaultNodePropsStore);
 	let dropped_in: boolean;
-  
-  	// Drag and drop events
+
+	// Drag and drop events
 	const handleDragEnter = (): void => {
 		if (!dropped_in) dropped_in = true;
 	};
@@ -295,15 +298,15 @@ const svelvetProps: SvelvetConfig = {
 		const target = e.target as HTMLElement;
 		target.dispatchEvent(moveEvent);
 	};
-  </script>
+</script>
 
 <div
 	role="presentation"
 	class="drop_zone"
-	on:dragenter={handleDragEnter}
-	on:dragleave={handleDragLeave}
-	on:dragover={onDragOver}
-	on:drop={handleDrop}
+	on:dragenter="{handleDragEnter}"
+	on:dragleave="{handleDragLeave}"
+	on:dragover="{onDragOver}"
+	on:drop="{handleDrop}"
 >
 	<Svelvet {...svelvetProps} drawer>
 		{#each defaultNodes as { anchors, edgeProps, ...nodeProps }}
@@ -374,7 +377,7 @@ const svelvetProps: SvelvetConfig = {
 		<slot name="toggle" slot="toggle" />
 	</Svelvet>
 </div>
-       
+
 <style>
 	/* Styles for the drop zone to make it visually distinct */
 	.drop_zone {
@@ -384,5 +387,3 @@ const svelvetProps: SvelvetConfig = {
 		position: relative;
 	}
 </style>
-
-

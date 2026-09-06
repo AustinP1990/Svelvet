@@ -9,20 +9,13 @@ test.describe('Svelvet Component Tests', () => {
 	});
 
 	test('Drag and Drop Nodes', async ({ page }) => {
-		// Assume there's a way to select nodes for dragging
-		// This will depend on your implementation details
-		const dragSource = await page.$('.node-drag-source');
-		const dropTarget = await page.$('.drop_zone');
+		const dragSource = page.locator('.defaultNodes').first();
+		const dropTarget = page.locator('#drop_zone');
+		const initialNodeCount = await page.locator('.svelvet-node').count();
 
-		if (dragSource && dropTarget) {
-			// Simulate drag and drop
-			await dragSource.dragTo(dropTarget);
+		await dragSource.dragTo(dropTarget);
 
-			// Verify the drop action has been handled
-			// This might include checking for a change in the number of nodes,
-			// a specific class name indicating a drop, or any visual change.
-			await expect(dropTarget).toHaveClass('expected-class-after-drop');
-		}
+		await expect(page.locator('.svelvet-node')).toHaveCount(initialNodeCount + 1);
 	});
 
 	test('DrawerController component', async ({ page }) => {

@@ -24,14 +24,14 @@
 	const output = generateOutput(inputs, processor);
 </script>
 
-<Svelvet width={1000} height={1000}>
-	<Node width={400} height={200} useDefaults>
+<Svelvet width="{1000}" height="{1000}">
+	<Node width="{400}" height="{200}" useDefaults>
 		<RadioGroup
-			options={['subtract', 'add', 'multiply', 'divide']}
-			parameterStore={$inputs.option}
+			options="{['subtract', 'add', 'multiply', 'divide']}"
+			parameterStore="{$inputs.option}"
 		/>
 	</Node>
-	<Node width={400} height={200} position={{ x: 0, y: 300 }} useDefaults>
+	<Node width="{400}" height="{200}" position="{{ x: 0, y: 300 }}" useDefaults>
 		{$output}
 	</Node>
 </Svelvet>

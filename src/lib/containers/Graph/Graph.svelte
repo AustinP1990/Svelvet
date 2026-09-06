@@ -11,12 +11,23 @@
 	import { calculateFitView, calculateTranslation, calculateZoom, generateKey } from '$lib/utils';
 	import { get, writable, readable } from 'svelte/store';
 	import { getRandomColor } from '$lib/utils';
-	import { moveElement, zoomAndTranslate } from '$lib/utils/movers';
+	import { zoomAndTranslate } from '$lib/utils/movers';
 	import type { Writable } from 'svelte/store';
-	import type { ComponentType } from 'svelte';
-	import type { Graph, GroupBox, GraphDimensions, CSSColorString } from '$lib/types';
+	import type { ComponentLike } from '$lib/types';
+	import type {
+		Graph,
+		GroupBox,
+		GraphDimensions,
+		CSSColorString,
+		Node,
+		Anchor,
+		AnchorKey,
+		Direction
+	} from '$lib/types';
 	import type { Arrow, GroupKey, Group, CursorAnchor, ActiveIntervals } from '$lib/types';
 	import { getSnappedPosition } from '$lib/utils/snapGrid';
+	import { createStore } from '$lib/utils/creators/createStore';
+	import { GRID_SCALE } from '$lib/constants';
 </script>
 
 <script lang="ts">
@@ -37,6 +48,7 @@
 	export let MIN_SCALE = 0.2;
 	export let selectionColor: CSSColorString;
 	export let backgroundExists: boolean;
+	export let gridWidth = GRID_SCALE;
 	export let fitView: boolean | 'resize' = false;
 	export let trackpadPan: boolean;
 	export let modifier: 'alt' | 'ctrl' | 'shift' | 'meta';
@@ -44,6 +56,14 @@
 	export let title: string;
 	export let drawer = false;
 	export let contrast = false;
+    export let keyControls = true;
+
+    // These variables track whether features were originally turned on
+    // at the first keypress. This way, keys can toggle features like
+    // the minimap only if they were initially enabled.
+    let initialMinimap: boolean;
+    let initialControls: boolean;
+    let initialDrawer: boolean;
 
 	// Log drawer prop initially
 	// console.log('Initial Graph drawer prop:', drawer);
@@ -88,11 +108,11 @@
 	let pinching = false;
 	let initialFit = false;
 	let graphDimensions: GraphDimensions;
-	let toggleComponent: ComponentType | null = null;
-	let minimapComponent: ComponentType | null = null;
-	let controlsComponent: ComponentType | null = null;
-	let drawerComponent: ComponentType | null = null;
-	let contrastComponent: ComponentType | null = null;
+	let toggleComponent: ComponentLike | null = null;
+	let minimapComponent: ComponentLike | null = null;
+	let controlsComponent: ComponentLike | null = null;
+	let drawerComponent: ComponentLike | null = null;
+	let contrastComponent: ComponentLike | null = null;
 
 	// Subscriptions
 	// This line is a Svelte reactive statement, denoted by $:. It creates a reactivity relationship between dimensions and dimensionsStore.
@@ -378,37 +398,48 @@
 		// We dont want to prevent users from interacting with inputs
 		if (target.tagName == 'INPUT' || target.tagName == 'TEXTAREA') return;
 
-		if (code === 'KeyA' && e[`${modifier}Key`]) {
+        // Remember if the controls or minimap were already open
+        if (initialControls === undefined) {
+            initialControls = controls;
+        }
+        if (initialMinimap === undefined) {
+            initialMinimap = minimap;
+        }
+        if (initialDrawer === undefined) {
+            initialDrawer = drawer;
+        }
+
+		if (code === 'KeyA' && e[`${modifier}Key`] && !disableSelection) {
 			const unlockedNodes = graph.nodes.getAll().filter((node) => !get(node.locked));
 			$selected = new Set(unlockedNodes);
-		} else if (isArrow(key)) {
+		} else if (isArrow(key) && pannable && keyControls) {
 			handleArrowKey(key as Arrow, e);
-		} else if (key === '=') {
+		} else if (key === '=' && !fixedZoom && keyControls) {
 			zoomAndTranslate(-1, graph.dimensions, graph.transforms, ZOOM_INCREMENT);
-		} else if (key === '-') {
+		} else if (key === '-' && !fixedZoom && keyControls) {
 			zoomAndTranslate(1, graph.dimensions, graph.transforms, ZOOM_INCREMENT);
-		} else if (key === '0') {
+		} else if (key === '0' && !fixedZoom && keyControls) {
 			fitIntoView();
 		} else if (key === 'Control') {
 			$groups['selected'].nodes.set(new Set());
-		} else if (code === 'KeyD' && e[`${modifier}Key`]) {
+		} else if (code === 'KeyD' && e[`${modifier}Key`] && graph.editable && keyControls) {
 			duplicate.set(true);
 			setTimeout(() => {
 				duplicate.set(false);
 			}, 100);
-		} else if (key === 'Tab' && (e.altKey || e.ctrlKey)) {
+		} else if (key === 'Tab' && (e.altKey || e.ctrlKey) && keyControls) {
 			selectNextNode();
-		} else if (key === 'l') {
+		} else if (key === 'l' && keyControls) {
 			theme = theme === 'light' ? 'dark' : 'light';
-		} else if (key === 'd') {
+		} else if (key === 'd' && initialDrawer) {
 			drawer = !drawer;
-		} else if (key === 'm') {
+		} else if (key === 'm' && initialMinimap) {
 			minimap = !minimap;
-		} else if (key === 'c') {
+		} else if (key === 'c' && initialControls) {
 			controls = !controls;
-		} else if (key === 'e') {
-			const node = Array.from($selected)[0];
-			graph.editing.set(node);
+		} else if (key === 'e' && graph.editable) {
+			const node = Array.from($selected).find(isNode);
+			if (node) graph.editing.set(node);
 		} else {
 			return; // Unhandled action: used default handler
 		}
@@ -416,8 +447,17 @@
 		e.preventDefault();
 	}
 
+	// Helper function to check if an item is a node
+	function isNode(item: Node | GroupBox): item is Node {
+		return 'anchors' in item;
+	}
+
 	function handleDrop(e: DragEvent) {
 		e.preventDefault();
+
+		// Retrieve the type of the node from the event
+		const draggedNodeType = e.dataTransfer?.getData('text/plain');
+		if (!draggedNodeType) return;
 
 		// Get the mouse position relative to the graph's DOM element
 		const graphRect = $graphDOMElement?.getBoundingClientRect();
@@ -430,12 +470,9 @@
 		const { x: snappedX, y: snappedY } = getSnappedPosition(mouseX, mouseY);
 		// console.log(`Dropped Node at Snapped Position: (${snappedX}, ${snappedY})`);
 
-		// Ensure that a node type is being dragged
-		if (!draggedNodeType) return;
-
 		// Create a new node with the snapped position
-		const newNode = {
-			id: `node-${Date.now()}`, // Unique ID based on timestamp
+		const newNode: Node = {
+			id: `N-${Date.now()}`, // Unique ID based on timestamp
 			rotation: writable(0), // Rotation angle
 			position: writable({ x: snappedX, y: snappedY }), // Position as a writable store
 			moving: writable(false), // Initial moving state
@@ -446,7 +483,7 @@
 			},
 			inputs: writable(2), // Default number of input anchors
 			outputs: writable(2), // Default number of output anchors
-			anchors: writable([]), // Empty anchors array (you may want to define this more specifically)
+			anchors: createStore<Anchor, AnchorKey>(),
 			group: writable(null), // Initially no group
 			collapsed: writable(false), // Default collapsed state
 			resizingWidth: writable(false), // Default resizing width state
@@ -454,7 +491,7 @@
 			rotating: writable(false), // Default rotating state
 			editable: writable(true), // Node is editable by default
 			locked: writable(false), // Node is not locked by default
-			recalculateAnchors: (direction?: Direction) => {
+			recalculateAnchors: (direction?: Direction | undefined) => {
 				/* Implementation */
 			}, // Function for recalculating anchors
 			resizable: writable(true), // Node is resizable by default
@@ -469,15 +506,8 @@
 			selectionColor: writable('#ff0000'), // Default selection color
 			textColor: writable('#fff') // Default text color
 		};
-		let draggedNodeType: string | null = null;
-
-		type Direction = 'TD' | 'LR';
-
 		// Add the new node to the graph store
 		graph.nodes.add(newNode, newNode.id);
-
-		// Reset the dragged node type
-		draggedNodeType = null;
 	}
 
 	//This function handles selecting nodes
@@ -630,26 +660,26 @@
 
 <section
 	role="presentation"
-	id={graph.id}
+	id="{graph.id}"
 	class="svelvet-wrapper"
-	{title}
-	style:width={width ? width + 'px' : '100%'}
-	style:height={height ? height + 'px' : '100%'}
-	style:cursor={pannable ? 'move' : 'default'}
-	on:wheel|preventDefault={handleScroll}
-	on:mousedown|preventDefault|self={onMouseDown}
-	on:touchend|preventDefault={onTouchEnd}
-	on:touchstart|preventDefault|self={onTouchStart}
-	on:keydown={handleKeyDown}
-	on:keyup={handleKeyUp}
-	on:dragover|preventDefault={handleDragOver}
-	on:drop={handleDrop}
-	bind:this={$graphDOMElement}
-	tabindex={0}
+	title="{title}"
+	style:width="{width ? width + 'px' : '100%'}"
+	style:height="{height ? height + 'px' : '100%'}"
+	style:cursor="{pannable ? 'move' : 'default'}"
+	on:wheel|preventDefault="{handleScroll}"
+	on:mousedown|preventDefault|self="{onMouseDown}"
+	on:touchend|preventDefault="{onTouchEnd}"
+	on:touchstart|preventDefault|self="{onTouchStart}"
+	on:keydown="{handleKeyDown}"
+	on:keyup="{handleKeyUp}"
+	on:dragover|preventDefault="{handleDragOver}"
+	on:drop="{handleDrop}"
+	bind:this="{$graphDOMElement}"
+	tabindex="{0}"
 >
-	<GraphRenderer {isMovable}>
+	<GraphRenderer isMovable="{isMovable}">
 		{#if $editing}
-			<Editor editing={$editing} />
+			<Editor editing="{$editing}" />
 		{/if}
 		<slot />
 	</GraphRenderer>
@@ -657,22 +687,22 @@
 	{#if backgroundExists}
 		<slot name="background" />
 	{:else}
-		<Background />
+		<Background gridWidth="{gridWidth}" />
 	{/if}
 	{#if minimap}
-		<svelte:component this={minimapComponent} />
+		<svelte:component this="{minimapComponent}" />
 	{/if}
 	{#if controls}
-		<svelte:component this={controlsComponent} />
+		<svelte:component this="{controlsComponent}" />
 	{/if}
 	{#if toggle}
-		<svelte:component this={toggleComponent} />
+		<svelte:component this="{toggleComponent}" />
 	{/if}
 	{#if drawer}
-		<svelte:component this={drawerComponent} />
+		<svelte:component this="{drawerComponent}" />
 	{/if}
 	{#if contrast}
-		<svelte:component this={contrastComponent} />
+		<svelte:component this="{contrastComponent}" />
 	{/if}
 	<slot name="minimap" />
 	<slot name="drawer" />
@@ -680,15 +710,21 @@
 	<slot name="toggle" />
 	<slot name="contrast" />
 	{#if selecting && !disableSelection}
-		<SelectionBox {creating} {anchor} {graph} {adding} color={selectionColor} />
+		<SelectionBox
+			creating="{creating}"
+			anchor="{anchor}"
+			graph="{graph}"
+			adding="{adding}"
+			color="{selectionColor}"
+		/>
 	{/if}
 </section>
 
 <svelte:window
-	on:touchend={onMouseUp}
-	on:mouseup={onMouseUp}
-	on:resize={updateGraphDimensions}
-	on:scroll={updateGraphDimensions}
+	on:touchend="{onMouseUp}"
+	on:mouseup="{onMouseUp}"
+	on:resize="{updateGraphDimensions}"
+	on:scroll="{updateGraphDimensions}"
 />
 
 <style>

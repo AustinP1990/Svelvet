@@ -1,15 +1,8 @@
-import type {
-	NodeProps,
-	AnchorProps,
-	EdgeProps,
-	NodeConfig,
-	AnchorDrawerConfig,
-	EdgeDrawerConfig
-} from '$lib/types';
+import type { NodeConfig, AnchorDrawerConfig, EdgeDrawerConfig } from '$lib/types';
 
 export function addProps(
 	propNames: string[],
-	propValues: NodeProps | AnchorProps | EdgeProps,
+	propValues: readonly unknown[],
 	propObject: NodeConfig | AnchorDrawerConfig | EdgeDrawerConfig | any
 ): void {
 	for (let i = 0; i < propNames.length; i++) {

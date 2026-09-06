@@ -41,7 +41,8 @@
 	// Reactive declarations
 	$: gridScale = scale * gridWidth; // Update grid scale when scale changes
 	$: radius = (scale * dotSize) / 2; // Update dot radius when scale changes
-	$: dotCenterCoordinate = gridScale / 2; // Place dot in the center of the grid
+	$: dotCenterCoordinate = 0; // center the dot on 0,0 to align with snapping
+    // $: dotCenterCoordinate = gridScale / 2; // Place dot in the center of the grid
 
 	// Update background offset when scale or offset changes
 	$: {
@@ -58,97 +59,90 @@
 <!-- BACKGROUND COMPONENT START -->
 <div
 	id="background-wrapper"
-	style:--calculated-background-color={bgColor}
-	bind:this={backgroundWrapper}
+	style:--calculated-background-color="{bgColor}"
+	bind:this="{backgroundWrapper}"
 >
 	<svg>
 		<defs>
 			<pattern
 				id="graph-pattern"
-				x={backgroundOffsetX}
-				y={backgroundOffsetY}
-				width={gridScale}
-				height={gridScale}
+				x="{backgroundOffsetX}"
+				y="{backgroundOffsetY}"
+				width="{gridScale}"
+				height="{gridScale}"
 				patternUnits="userSpaceOnUse"
 			>
 				{#if style === 'dots'}
 					<circle
 						class="background-dot"
-						style:--calculated-dot-color={dotColor}
-						r={radius}
-						cx={dotCenterCoordinate}
-						cy={dotCenterCoordinate}
-					/>
+						style:--calculated-dot-color="{dotColor}"
+						r="{radius}"
+						cx="{dotCenterCoordinate}"
+						cy="{dotCenterCoordinate}"></circle>
 				{:else if style === 'lines'}
 					<line
 						class="background-line"
-						style:--calculated-dot-color={dotColor}
-						x1={dotCenterCoordinate}
-						y1={0}
-						x2={dotCenterCoordinate}
-						y2={gridScale}
-						stroke-width={radius}
-					/>
+						style:--calculated-dot-color="{dotColor}"
+						x1="{dotCenterCoordinate}"
+						y1="{0}"
+						x2="{dotCenterCoordinate}"
+						y2="{gridScale}"
+						stroke-width="{radius}"></line>
 					<line
 						class="background-line"
-						style:--calculated-dot-color={dotColor}
-						y1={dotCenterCoordinate}
-						x1={0}
-						y2={dotCenterCoordinate}
-						x2={gridScale}
-						stroke-width={radius}
-					/>
+						style:--calculated-dot-color="{dotColor}"
+						y1="{dotCenterCoordinate}"
+						x1="{0}"
+						y2="{dotCenterCoordinate}"
+						x2="{gridScale}"
+						stroke-width="{radius}"></line>
 				{/if}
 			</pattern>
 
 			{#if majorGrid > 0}
 				<pattern
 					id="graph-coarse-pattern"
-					x={backgroundOffsetX}
-					y={backgroundOffsetY}
-					width={gridScale * majorGrid}
-					height={gridScale * majorGrid}
+					x="{backgroundOffsetX}"
+					y="{backgroundOffsetY}"
+					width="{gridScale * majorGrid}"
+					height="{gridScale * majorGrid}"
 					patternUnits="userSpaceOnUse"
 				>
 					{#if style === 'dots'}
 						<circle
 							class="background-dot"
-							style:--calculated-dot-color={dotColor}
-							r={radius * 2}
-							cx={dotCenterCoordinate}
-							cy={dotCenterCoordinate}
-						/>
+							style:--calculated-dot-color="{dotColor}"
+							r="{radius * 2}"
+							cx="{dotCenterCoordinate}"
+							cy="{dotCenterCoordinate}"></circle>
 					{:else if style === 'lines'}
 						<line
 							class="background-line"
-							style:--calculated-dot-color={dotColor}
-							x1={dotCenterCoordinate}
-							y1={0}
-							x2={dotCenterCoordinate}
-							y2={gridScale * majorGrid}
-							stroke-width={radius * 1.2}
-						/>
+							style:--calculated-dot-color="{dotColor}"
+							x1="{dotCenterCoordinate}"
+							y1="{0}"
+							x2="{dotCenterCoordinate}"
+							y2="{gridScale * majorGrid}"
+							stroke-width="{radius * 1.2}"></line>
 						<line
 							class="background-line"
-							style:--calculated-dot-color={dotColor}
-							y1={dotCenterCoordinate}
-							x1={0}
-							y2={dotCenterCoordinate}
-							x2={gridScale * majorGrid}
-							stroke-width={radius * 1.2}
-						/>
+							style:--calculated-dot-color="{dotColor}"
+							y1="{dotCenterCoordinate}"
+							x1="{0}"
+							y2="{dotCenterCoordinate}"
+							x2="{gridScale * majorGrid}"
+							stroke-width="{radius * 1.2}"></line>
 					{/if}
 				</pattern>
 			{/if}
 		</defs>
-		<rect width="100%" height="100%" fill="url(#graph-pattern)" opacity={gridOpacity} />
+		<rect width="100%" height="100%" fill="url(#graph-pattern)" opacity="{gridOpacity}"></rect>
 		{#if majorGrid > 0}
 			<rect
 				width="100%"
 				height="100%"
 				fill="url(#graph-coarse-pattern)"
-				opacity={majorGridOpacity}
-			/>
+				opacity="{majorGridOpacity}"></rect>
 		{/if}
 	</svg>
 </div>

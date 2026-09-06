@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-// console.log('Drawer Mounted from DrawerNode');	
+	// console.log('Drawer Mounted from DrawerNode');
 	import { writable } from 'svelte/store';
 	import type {
 		NodeDrawerConfig,
@@ -14,13 +14,14 @@
 	// External stores
 	export const defaultNodePropsStore = writable<Array<NodeDrawerConfig>>([]);
 
-	// Node properties
-	let nodeProps: Partial<NodeDrawerConfig> = {
-		width: 200,
-		height: 100,
-		x: 0,
-		y: 0
-	};
+	// Seemed to be just for testing in the past
+	// // Node properties
+	// let nodeProps: Partial<NodeDrawerConfig> = {
+	// 	width: 200,
+	// 	height: 100,
+	// 	x: 0,
+	// 	y: 0
+	// };
 
 	// types for node creation
 	let bgColor: CSSColorString | undefined;
@@ -161,15 +162,15 @@
 
 <div id="nodeContainer">
 	<!-- On submit resets all the values on the input field in the form to default -->
-	<form on:submit|preventDefault={handleNodeResetButtonClick}>
+	<form on:submit|preventDefault="{handleNodeResetButtonClick}">
 		<ul aria-labelledby="select_props">
 			<li class="list-item">
 				<label for="bgColor">Background: </label>
-				<input id="bgColor" class="colorWheel" type="color" bind:value={bgColor} />
+				<input id="bgColor" class="colorWheel" type="color" bind:value="{bgColor}" />
 			</li>
 			<li class="list-item">
 				<label for="borderColor">Border: </label>
-				<input id="borderColor" class="colorWheel" type="color" bind:value={borderColor} />
+				<input id="borderColor" class="colorWheel" type="color" bind:value="{borderColor}" />
 			</li>
 			<!-- <li class="list-item">
 				<label for="useDefaults">useDefaults: </label>
@@ -186,50 +187,55 @@
 			</li>
 			<li class="list-item">
 				<label for="width">Width:</label>
-				<input id="width" class="inputField" type="input" bind:value={width} />
+				<input id="width" class="inputField" type="input" bind:value="{width}" />
 				<label for="height" style="margin-left: 6px">Height:</label>
-				<input id="height" class="inputField" type="input" bind:value={height} />
+				<input id="height" class="inputField" type="input" bind:value="{height}" />
 			</li>
 			<li class="list-item">
 				<label for="locked">Locked: </label>
-				<input id="label" type="checkbox" bind:value={locked} on:change={handleLockedButtonClick} />
+				<input
+					id="label"
+					type="checkbox"
+					bind:value="{locked}"
+					on:change="{handleLockedButtonClick}"
+				/>
 			</li>
 			<li class="list-item">
 				<label for="centered">Centered: </label>
 				<input
 					id="centered"
 					type="checkbox"
-					bind:value={center}
-					on:change={handleCenterButtonClick}
+					bind:value="{center}"
+					on:change="{handleCenterButtonClick}"
 				/>
 			</li>
 			<li class="list-item">
 				<label for="rotation">Rotation:</label>
-				<input id="rotation" class="inputField" type="number" bind:value={rotation} />
+				<input id="rotation" class="inputField" type="number" bind:value="{rotation}" />
 			</li>
 			<li class="list-item">
 				<label for="zIndex">zIndex:</label>
-				<input id="zIndex" class="inputField" type="number" bind:value={zIndex} />
+				<input id="zIndex" class="inputField" type="number" bind:value="{zIndex}" />
 			</li>
 			<li class="list-item">
 				<label for="label">Label : </label>
-				<input id="label" type="text" bind:value={label} />
+				<input id="label" type="text" bind:value="{label}" />
 			</li>
 			<li class="list-item">
 				<label for="defaultAnchors">Default Anchors:</label>
 			</li>
 			<li class="list-item">
 				<label for="inputAnchor">Input: </label>
-				<input id="inputAnchor" class="inputField" type="number" min="0" bind:value={inputs} />
+				<input id="inputAnchor" class="inputField" type="number" min="0" bind:value="{inputs}" />
 				<label for="outputAnchor" style="margin-left: 6px">Output: </label>
-				<input id="outputAnchor" class="inputField" type="number" min="0" bind:value={outputs} />
+				<input id="outputAnchor" class="inputField" type="number" min="0" bind:value="{outputs}" />
 			</li>
 			<li class="list-item">
 				<label for="anchorPositon">Anchor Position: </label>
 				<select
 					id="anchorPosition"
-					bind:value={nodeDirection}
-					on:change={handleAnchorPositionButton}
+					bind:value="{nodeDirection}"
+					on:change="{handleAnchorPositionButton}"
 				>
 					<option value="">-</option>
 					<option value="LR">LR</option>

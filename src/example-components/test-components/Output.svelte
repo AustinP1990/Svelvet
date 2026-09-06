@@ -27,35 +27,51 @@
 	const output = generateOutput(inputs, processor);
 </script>
 
-<Node useDefaults id="output" position={{ x: 560, y: 30 }} let:selected locked>
-	<div class="node" class:selected>
+<Node useDefaults id="output" position="{{ x: 560, y: 30 }}" let:selected locked>
+	<div class="node" class:selected="{selected}">
 		<Visualizer {...$output} />
 		<div class="input-anchors">
 			{#each Object.keys(initialData) as key}
 				{#if key === 'color'}
-					<Anchor id={key} let:connecting let:linked inputsStore={inputs} {key} input locked>
-						<ColorAnchor color={$inputs[key]} {connecting} {linked} />
+					<Anchor
+						id="{key}"
+						let:connecting
+						let:linked
+						inputsStore="{inputs}"
+						key="{key}"
+						input
+						locked
+					>
+						<ColorAnchor color="{$inputs[key]}" connecting="{connecting}" linked="{linked}" />
 					</Anchor>
 				{:else if key === 'animation'}
 					<Anchor
-						id={key}
-						on:disconnection={() => {
+						id="{key}"
+						on:disconnection="{() => {
 							if ($inputs && typeof $inputs.animation.set === 'function') {
 								$inputs.animation.set(0);
 							}
-						}}
+						}}"
 						let:hovering
 						let:connecting
 						let:linked
-						inputsStore={inputs}
-						{key}
+						inputsStore="{inputs}"
+						key="{key}"
 						input
 					>
-						<CustomAnchor {hovering} {connecting} {linked} />
+						<CustomAnchor hovering="{hovering}" connecting="{connecting}" linked="{linked}" />
 					</Anchor>
 				{:else}
-					<Anchor id={key} let:hovering let:connecting let:linked inputsStore={inputs} {key} input>
-						<CustomAnchor {hovering} {connecting} {linked} />
+					<Anchor
+						id="{key}"
+						let:hovering
+						let:connecting
+						let:linked
+						inputsStore="{inputs}"
+						key="{key}"
+						input
+					>
+						<CustomAnchor hovering="{hovering}" connecting="{connecting}" linked="{linked}" />
 					</Anchor>
 				{/if}
 			{/each}

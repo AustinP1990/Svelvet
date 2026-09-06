@@ -23,16 +23,16 @@
 	role="button"
 	tabindex="0"
 	on:contextmenu|stopPropagation|preventDefault
-	on:mousedown|stopPropagation|preventDefault={dispatchClick}
+	on:mousedown|stopPropagation|preventDefault="{dispatchClick}"
 	class="bounding-box-border"
-	{id}
-	style:top={`${$position.y}px`}
-	style:left={`${$position.x}px`}
-	style:width={`${$width}px`}
-	style:height={`${$height}px`}
+	id="{id}"
+	style:top="{`${$position.y}px`}"
+	style:left="{`${$position.x}px`}"
+	style:width="{`${$width}px`}"
+	style:height="{`${$height}px`}"
 	style="border: solid 4px {$color};"
 >
-	<div class="bounding-box" style:background-color={$color} />
+	<div class="bounding-box" style:background-color="{$color}"></div>
 </div>
 
 <style>

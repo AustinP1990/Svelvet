@@ -23,7 +23,8 @@
 		AnchorConnectionEvent
 	} from '$lib/types';
 	import type { InputType, NodeKey, OutputStore, InputStore, ConnectingFrom } from '$lib/types';
-	import type { ComponentType } from 'svelte';
+	import type { FlowChart } from '$lib/types/parser';
+	import type { ComponentLike } from '$lib/types';
 	import type { Writable, Readable } from 'svelte/store';
 
 	let animationFrameId: number;
@@ -54,10 +55,10 @@
 	const mounted = getContext<Writable<number | true>>('mounted');
 	const graph = getContext<Graph>('graph');
 	const nodeStore = getContext<Graph['nodes']>('nodeStore');
-	const graphEdge = getContext<ComponentType>('graphEdge');
+	const graphEdge = getContext<ComponentLike>('graphEdge');
 	const nodeConnectEvent = getContext<Writable<null | MouseEvent>>('nodeConnectEvent');
 	const anchorsMounted = getContext<Writable<number>>('anchorsMounted');
-	const flowChart = getContext<object>('flowchart') || undefined;
+	const flowChart = getContext<FlowChart | undefined>('flowchart');
 
 	export let bgColor: CSSColorString | null = null;
 	export let id: string | number = 0;
@@ -75,7 +76,7 @@
 	 * based on the relative positioning of connected Nodes
 	 */
 	export let dynamic = nodeDynamic || false;
-	export let edge: ComponentType | null = null;
+	export let edge: ComponentLike | null = null;
 	export let inputsStore: InputStore | null = null;
 	export let key: string | number | null = null;
 	export let outputStore: OutputStore | null = null;
@@ -429,7 +430,7 @@
 				if (targetInSourceChildren) {
 					// configure the edge with data defined in the flowchart
 					const edgeData = targetInSourceChildren;
-					edgeConfig.label = { text: edgeData.content };
+					edgeConfig.label = { text: edgeData.content ?? '' };
 				}
 			}
 		}
@@ -626,29 +627,29 @@
 </script>
 
 <div
-	id={anchor?.id}
+	id="{anchor?.id}"
 	class="anchor-wrapper"
 	role="button"
 	tabindex="0"
-	class:locked
-	title={title || ''}
-	on:mouseenter={() => (hovering = true)}
-	on:mouseleave={() => (hovering = false)}
-	on:mousedown|stopPropagation|preventDefault={handleClick}
-	on:mouseup|stopPropagation={handleMouseUp}
-	on:touchstart|stopPropagation|preventDefault={handleClick}
-	on:touchend|stopPropagation={handleMouseUp}
-	bind:this={anchorElement}
+	class:locked="{locked}"
+	title="{title || ''}"
+	on:mouseenter="{() => (hovering = true)}"
+	on:mouseleave="{() => (hovering = false)}"
+	on:mousedown|stopPropagation|preventDefault="{handleClick}"
+	on:mouseup|stopPropagation="{handleMouseUp}"
+	on:touchstart|stopPropagation|preventDefault="{handleClick}"
+	on:touchend|stopPropagation="{handleMouseUp}"
+	bind:this="{anchorElement}"
 >
-	<slot linked={$connectedAnchors?.size >= 1} {hovering} {connecting}>
+	<slot linked="{$connectedAnchors?.size >= 1}" hovering="{hovering}" connecting="{connecting}">
 		{#if !invisible}
 			<DefaultAnchor
-				{output}
-				{input}
-				{connecting}
-				{hovering}
-				{bgColor}
-				connected={$connectedAnchors?.size >= 1}
+				output="{output}"
+				input="{input}"
+				connecting="{connecting}"
+				hovering="{hovering}"
+				bgColor="{bgColor}"
+				connected="{$connectedAnchors?.size >= 1}"
 			/>
 		{/if}
 	</slot>
@@ -658,7 +659,7 @@
 	{@const edge = edgeStore.fetch(anchor, target)}
 	{#if edge && edge.source === anchor}
 		{@const CustomEdge = edge.component}
-		<EdgeContext {edge}>
+		<EdgeContext edge="{edge}">
 			<slot name="edge">
 				{#if CustomEdge}
 					<CustomEdge />
@@ -674,7 +675,7 @@
 	{@const edge = edgeStore.get('cursor')}
 	{#if edge}
 		{@const CustomEdge = edge.component}
-		<EdgeContext {edge}>
+		<EdgeContext edge="{edge}">
 			<slot name="edge">
 				{#if CustomEdge}
 					<CustomEdge />

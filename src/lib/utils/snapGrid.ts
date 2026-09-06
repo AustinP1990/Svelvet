@@ -2,7 +2,12 @@
 //takes node position and rounds it to the nearest grid intersection
 //returns new snapped position
 
-export const cell = { width: 200, height: 100 };
+// This default size will be changed by Svelvet.svelte
+let snapSize = 0;
+
+export function setSnapTo(snapTo: number): void {
+	snapSize = snapTo;
+}
 
 /**
  * Snaps a given position to the nearest grid cell.
@@ -10,13 +15,16 @@ export const cell = { width: 200, height: 100 };
  * @param y - The y-coordinate of the node
  * @returns The new snapped (x, y) position
  */
-
 export function getSnappedPosition(x: number, y: number): { x: number; y: number } {
-
-	// console.log('Snapping position:', { x, y }); // Debugging line
-
-	return {
-		x: Math.round(x / cell.width) * cell.width,
-		y: Math.round(y / cell.height) * cell.height
-	};
+	if (snapSize == 0) {
+        return {
+            x: x,
+            y: y
+        };
+    } else {
+        return {
+            x: Math.round(x / snapSize) * snapSize,
+            y: Math.round(y / snapSize) * snapSize
+	    };
+    }
 }

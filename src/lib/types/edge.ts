@@ -10,7 +10,7 @@ import type {
 	Node
 } from '.';
 import type { PixelValue, RemValue } from '.';
-import type { ComponentType } from 'svelte';
+import type { ComponentLike } from './general';
 export type EdgeStyle = 'straight' | 'step' | 'bezier';
 export type EndStyle = 'arrow' | null;
 
@@ -28,7 +28,7 @@ export type WritableEdge = {
 	label?: EdgeLabel;
 	animated: Writable<boolean>;
 	disconnect?: true;
-	component: ComponentType | null;
+	component: ComponentLike | null;
 	rendered: Writable<boolean>;
 	// raiseEdgeOnSelect?: boolean;
 	// edgesAbove?: boolean;

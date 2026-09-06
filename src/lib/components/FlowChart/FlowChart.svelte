@@ -47,11 +47,11 @@
 	{#each row as node}
 		{#if !node.ignore}
 			<Node
-				label={node.label}
-				id={node.id}
-				TD={true}
+				label="{node.label}"
+				id="{node.id}"
+				TD="{true}"
 				{...mermaidConfig[node.id]}
-				connections={node.children.map((id) => [id, '1'])}
+				connections="{node.children.map((id) => [id, '1'])}"
 			/>
 		{/if}
 	{/each}
